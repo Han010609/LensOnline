@@ -99,9 +99,6 @@ router.get('/', async (req, res) => {
     rentalQuery += ` WHERE 1=1 `; // ✅ 確保篩選條件可以正常拼接
     let queryParams = user_id ? [user_id] : [];
 
-    console.log('🚧 即將執行 SQL:', rentalQuery)
-    console.log('🧪 使用參數:', queryParams)
-
     const { query, category, advanced, brands } = req.query
 
     // ✅ 用途篩選邏輯 (動態映射)
