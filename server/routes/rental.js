@@ -23,19 +23,6 @@ const auth = (req, res, next) => {
   }
 }
 
-// // 📌 簡化版 rental API，用於部署測試
-// router.get('/', async (req, res) => {
-//   try {
-//     const [rentals] = await pool.query('SELECT * FROM rental LIMIT 10')
-//     res.json({ success: true, rentals })
-//   } catch (error) {
-//     console.error('❌ rental 測試 API 出錯:', error)
-//     res.status(500).json({ success: false, error: '伺服器錯誤', details: error.message })
-//   }
-// })
-
-
-
 // 📌統一 API - 獲取商品資料 & 篩選選項
 router.get('/', async (req, res) => {
   try {
