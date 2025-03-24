@@ -51,7 +51,7 @@ const server = http.createServer(app);
 
 
 
-const whiteList = ['http://localhost:5500', 'http://localhost:3000','https://lenstudio.vercel.app']
+const whiteList = ['http://localhost:5500', 'http://localhost:3000', 'https://lenstudio.vercel.app']
 const corsOptions = {
   credentials: true,
   origin: (origin, callback) => {
@@ -71,14 +71,14 @@ if (serverConfig.sessionStoreType === 'redis') {
     url: process.env.REDIS_URL,
   })
 
-  // 連線redis
-  redisClient.connect().catch(console.error)
+  // // 連線redis
+  // redisClient.connect().catch(console.error)
 
-  // 初始化redisStore
-  sessionStore = new RedisStore({
-    client: redisClient,
-    prefix: 'express-vercel:',
-  })
+  // // 初始化redisStore
+  // sessionStore = new RedisStore({
+  //   client: redisClient,
+  //   prefix: 'express-vercel:',
+  // })
 } else {
   // 使用檔案記錄session
   const FileStore = sessionFileStore(session)
