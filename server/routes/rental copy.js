@@ -2,9 +2,6 @@ import express from 'express'
 import pool from '../db.js'
 import jwt from 'jsonwebtoken'
 
-console.log('🚧 即將執行 SQL:', rentalQuery)
-console.log('🧪 使用參數:', queryParams)s
-
 const router = express.Router()
 
 // 會員認證(回傳Token含式)
