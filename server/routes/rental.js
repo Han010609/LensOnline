@@ -54,29 +54,29 @@ router.get('/', async (req, res) => {
 
     // ✅ 組織商品查詢語句
     let rentalQuery = `
-      SELECT 
-          r.id,
-          r.name,
-          r.brand,
-          r.category,
-          r.fee,
-          r.stock,
-          r.dimension,
-          r.weight,
-          r.status,
-          r.append,
-          r.summary,
-          r.cam_kind,
-          r.cam_sensor,
-          r.cam_with,
-          r.len_kind,
-          r.len_with,
-          r.acc_kind,
-          r.acc_with, 
-          GROUP_CONCAT(DISTINCT ri.url ORDER BY COALESCE(ri.sequence, 999) ASC) AS images,
-          GROUP_CONCAT(DISTINCT t.tags) AS hashtags,
-          IFNULL(reviews.total_reviews, 0) AS total_reviews,
-          IFNULL(reviews.average_rating, 0) AS average_rating      
+ SELECT 
+        r.id,
+        ANY_VALUE(r.name) AS name,
+        ANY_VALUE(r.brand) AS brand,
+        ANY_VALUE(r.category) AS category,
+        ANY_VALUE(r.fee) AS fee,
+        ANY_VALUE(r.stock) AS stock,
+        ANY_VALUE(r.dimension) AS dimension,
+        ANY_VALUE(r.weight) AS weight,
+        ANY_VALUE(r.status) AS status,
+        ANY_VALUE(r.append) AS append,
+        ANY_VALUE(r.summary) AS summary,
+        ANY_VALUE(r.cam_kind) AS cam_kind,
+        ANY_VALUE(r.cam_sensor) AS cam_sensor,
+        ANY_VALUE(r.cam_with) AS cam_with,
+        ANY_VALUE(r.len_kind) AS len_kind,
+        ANY_VALUE(r.len_with) AS len_with,
+        ANY_VALUE(r.acc_kind) AS acc_kind,
+        ANY_VALUE(r.acc_with) AS acc_with,
+        GROUP_CONCAT(DISTINCT ri.url ORDER BY COALESCE(ri.sequence, 999) ASC) AS images,
+        GROUP_CONCAT(DISTINCT t.tags) AS hashtags,
+        IFNULL(reviews.total_reviews, 0) AS total_reviews,
+        IFNULL(reviews.average_rating, 0) AS average_rating
       `;
 
     // 🚀 若用戶已登入，加入收藏關聯
