@@ -2,9 +2,6 @@ import express from 'express'
 import pool from '../db.js'
 import jwt from 'jsonwebtoken'
 
-console.log('🚧 即將執行 SQL:', rentalQuery)
-console.log('🧪 使用參數:', queryParams)
-
 const router = express.Router()
 
 // 會員認證(回傳Token含式)
@@ -97,6 +94,9 @@ router.get('/', async (req, res) => {
 
 //     rentalQuery += ` WHERE 1=1 `; // ✅ 確保篩選條件可以正常拼接
 //     let queryParams = user_id ? [user_id] : [];
+
+// console.log('🚧 即將執行 SQL:', rentalQuery)
+// console.log('🧪 使用參數:', queryParams)
 
 //     const { query, category, advanced, brands } = req.query
 
