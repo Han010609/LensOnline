@@ -67,9 +67,9 @@ let sessionStore = null
 
 if (serverConfig.sessionStoreType === 'redis') {
   // 使用redis記錄session
-  let redisClient = createClient({
-    url: process.env.REDIS_URL,
-  })
+  // let redisClient = createClient({
+  //   url: process.env.REDIS_URL,
+  // })
 
   // // 連線redis
   // redisClient.connect().catch(console.error)
