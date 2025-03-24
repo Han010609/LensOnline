@@ -372,24 +372,25 @@ router.get('/:id', async (req, res) => {
     // 3.獲取推薦商品（基於 `rent_recommend`）
     let recommendQuery = `
         SELECT 
-          r.id,
-          ANY_VALUE(r.name) AS name,
-          ANY_VALUE(r.brand) AS brand,
-          ANY_VALUE(r.category) AS category,
-          ANY_VALUE(r.fee) AS fee,
-          ANY_VALUE(r.stock) AS stock,
-          ANY_VALUE(r.dimension) AS dimension,
-          ANY_VALUE(r.weight) AS weight,
-          ANY_VALUE(r.status) AS status,
-          ANY_VALUE(r.append) AS append,
-          ANY_VALUE(r.summary) AS summary,
-          ANY_VALUE(r.cam_kind) AS cam_kind,
-          ANY_VALUE(r.cam_sensor) AS cam_sensor,
-          ANY_VALUE(r.cam_with) AS cam_with,
-          ANY_VALUE(r.len_kind) AS len_kind,
-          ANY_VALUE(r.len_with) AS len_with,
-          ANY_VALUE(r.acc_kind) AS acc_kind,
-          ANY_VALUE(r.acc_with) AS acc_with,
+        r.id,
+        ANY_VALUE(r.name) AS name,
+        ANY_VALUE(r.brand) AS brand,
+        ANY_VALUE(r.category) AS category,
+        ANY_VALUE(r.fee) AS fee,
+        ANY_VALUE(r.stock) AS stock,
+        ANY_VALUE(r.dimension) AS dimension,
+        ANY_VALUE(r.weight) AS weight,
+        ANY_VALUE(r.status) AS status,
+        ANY_VALUE(r.append) AS append,
+        ANY_VALUE(r.summary) AS summary,
+        ANY_VALUE(r.cam_kind) AS cam_kind,
+        ANY_VALUE(r.cam_sensor) AS cam_sensor,
+        ANY_VALUE(r.cam_with) AS cam_with,
+        ANY_VALUE(r.len_kind) AS len_kind,
+        ANY_VALUE(r.len_with) AS len_with,
+        ANY_VALUE(r.acc_kind) AS acc_kind,
+        ANY_VALUE(r.acc_with) AS acc_with,ㄋ
+        ANY_VALUE(rr.sequence) AS sequence,
         GROUP_CONCAT(DISTINCT ri.url ORDER BY ri.sequence ASC) AS images,
         GROUP_CONCAT(DISTINCT t.tags) AS hashtags,
         IFNULL(reviews.total_reviews, 0) AS total_reviews,
@@ -426,7 +427,7 @@ router.get('/:id', async (req, res) => {
     recommendQuery += `
         WHERE rr.rent_id = ?
         GROUP BY r.id
-        ORDER BY rr.sequence ASC;
+        ORDER BY sequence ASC;
       `
 
     // ✅ 執行推薦商品查詢
