@@ -56,7 +56,7 @@ export default function Sidenav() {
   };
 
   return (
-    <div className="col-md-10 col-xl-3 mb-4">
+    <div className=" col-xl-3 mb-4">
       {isMobile ? (
         <div className={styles.mobileMenu}>
           <button className={styles.menuBtn} onClick={() => setMenuOpen(!menuOpen)}>

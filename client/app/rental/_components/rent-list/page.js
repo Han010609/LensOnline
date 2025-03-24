@@ -133,7 +133,7 @@ export default function RentList() {
       const token = localStorage.getItem('loginWithToken');
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-      // 🚀 只發送一次 API
+      // 🚀  只發送一次 API
       const res = await fetch(`https://lenstudio.onrender.com/api/rental?${params.toString()}`, { headers });
       const data = await res.json();
 

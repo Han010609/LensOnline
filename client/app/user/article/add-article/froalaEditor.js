@@ -93,7 +93,12 @@ export default function FroalaEditorWrapper({ initialContent }) {
               console.log('Froala Editor 初始化完成，設定全局實例');
               window.editorInstance = this;
               this.el.style.backgroundColor = 'transparent';
-              
+
+              // 新增: 注入高優先級樣式
+              const cssOverride = document.createElement('style');
+              cssOverride.textContent = '.fr-view [style*="text-align"] { text-align: inherit !important; }';
+              document.head.appendChild(cssOverride);
+
               // 確保初始內容會被設定
               if (initialContent) {
                 console.log('設定初始內容：', initialContent.substring(0, 50) + '...');
@@ -103,47 +108,17 @@ export default function FroalaEditorWrapper({ initialContent }) {
                 }, 200);
               }
             },
+            // 修改 contentChanged 事件，不再重新設置內容
             contentChanged: function () {
-              // 取得編輯器內容
-              const content = this.html.get()
-              // 建立一個 DOM 解析器
-              const parser = new DOMParser()
-              // 將編輯器內容解析為 DOM
-              const doc = parser.parseFromString(content, 'text/html')
-              // 取得所有 <img> 標籤
-              const images = doc.querySelectorAll('img')
-              // 迴圈處理每個 <img> 標籤
-              images.forEach((image) => {
-                // 取得 src 屬性
-                const src = image.getAttribute('src')
-                // 如果 src 屬性為空字串
-                if (src === '') {
-                  // 將 src 屬性設定為 null
-                  image.setAttribute('src', null)
-                }
-              })
-              // 將修改後的 DOM 轉換為 HTML
-              const newContent = doc.body.innerHTML
-              // 設定編輯器內容
-              this.html.set(newContent)
-            },
-            initialized: function () {
-              window.editorInstance = this
-              // 修改內文區塊的樣式
-              this.el.style.backgroundColor = 'transparent'
-              console.log('Froala Editor 初始化完成');
-              window.editorInstance = this;
+              // 只檢查但不重設內容，避免游標跳回問題
+              const content = this.html.get();
 
-              // 新增: 注入高優先級樣式
-              const cssOverride = document.createElement('style');
-              cssOverride.textContent = '.fr-view [style*="text-align"] { text-align: inherit !important; }';
-              document.head.appendChild(cssOverride);
-
-              // 如果提供了初始內容，設置它
-              if (initialContent) {
-                setTimeout(() => {
-                  this.html.set(initialContent);
-                }, 100); // 短暫延遲確保編輯器完全就緒
+              // 只在發現空 src 的圖片時才處理，且使用 DOM API 直接修改
+              if (content.includes('img src=""')) {
+                const images = this.el.querySelectorAll('img[src=""]');
+                images.forEach(img => {
+                  img.removeAttribute('src');
+                });
               }
             },
             'image.beforeUpload': function (files) {

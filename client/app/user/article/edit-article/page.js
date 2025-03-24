@@ -13,6 +13,8 @@ import EditHashtagInput from './EditHashtagInput'
 import EditButtonGroup from './EditButtonGroup'
 import Sidenav from '../../_components/Sidenav/page'
 import { checkRequiredFields } from '../add-article/page'
+// 引入共用彈窗配置
+import { errorAlert, successAlert, autoCloseAlert } from '@/utils/sweetAlertConfig'
 
 const FroalaEditor = dynamic(() => import('../add-article/froalaEditor'), { ssr: false })
 
@@ -97,7 +99,7 @@ export default function EditArticlePage() {
         }, 0)
       } catch (error) {
         console.error('載入文章錯誤:', error)
-        Swal.fire({
+        errorAlert.fire({
           icon: 'error',
           title: '載入文章失敗',
           text: '無法取得文章資料，請稍後再試'
@@ -135,7 +137,7 @@ export default function EditArticlePage() {
     const allFilled = checkRequiredFields()
     if (!allFilled) {
       setHasError(true)
-      Swal.fire({
+      errorAlert.fire({
         icon: 'error',
         title: '錯誤',
         text: '請填寫所有必填欄位',
@@ -155,7 +157,7 @@ export default function EditArticlePage() {
           !categorySelect ? '分類選擇器缺失' : '',
           !titleInput ? '標題輸入框缺失' : ''
         );
-        Swal.fire({
+        errorAlert.fire({
           icon: 'error',
           title: '表單錯誤',
           text: '無法找到必要表單欄位，請重新整理頁面後再試',
@@ -187,29 +189,19 @@ export default function EditArticlePage() {
       })
 
       // 顯示成功訊息
-      Swal.fire({
+      autoCloseAlert.fire({
         icon: 'success',
         title: '更新成功',
-        text: '文章已成功更新',
-        timer: 1000,
-        showConfirmButton: false,
-        customClass: {
-          popup: "y-custom-popup"
-        }
+        text: '文章已成功更新'
       }).then(() => {
         confirmClose()
       })
     } catch (error) {
       console.error('更新文章時發生錯誤:', error)
-      Swal.fire({
+      errorAlert.fire({
         icon: 'error',
         title: 'Oops...',
-        text: '更新失敗，請稍後再試',
-        customClass: {
-          confirmButton: "btn-custom-confirm-OK",
-          popup: "y-custom-popup"
-        },
-        buttonsStyling: false
+        text: '更新失敗，請稍後再試'
       })
     }
   }, [articleId, confirmClose, articleData, currentImagePath]) // 確保添加 currentImagePath 作為依賴

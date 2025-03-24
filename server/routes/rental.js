@@ -23,7 +23,7 @@ const auth = (req, res, next) => {
   }
 }
 
-// 📌 統一 API - 獲取商品資料 & 篩選選項
+// 📌統一 API - 獲取商品資料 & 篩選選項
 router.get('/', async (req, res) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];

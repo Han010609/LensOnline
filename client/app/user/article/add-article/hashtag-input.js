@@ -7,6 +7,8 @@ import React, {
 import Swal from 'sweetalert2'
 import 'animate.css'
 import styles from './AddArticleModal.module.scss'
+// 導入統一彈窗配置
+import { errorAlert } from '@/utils/sweetAlertConfig'
 
 const HashtagInput = forwardRef((props, ref) => {
   const [hashtagInput, setHashtagInput] = useState('')
@@ -29,14 +31,10 @@ const HashtagInput = forwardRef((props, ref) => {
       e.preventDefault()
       const inputVal = hashtagInput.trim()
       if (!inputVal.startsWith('#')) {
-        Swal.fire({
-          title: "Hashtag 必須以 '#' 開頭",
-          showClass: {
-            popup: 'animate__animated animate__fadeInUp animate__faster',
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutDown animate__faster',
-          },
+        // 替換為統一樣式
+        errorAlert.fire({
+          icon: 'error',
+          title: "Hashtag 必須以 '#' 開頭"
         })
         return
       }
@@ -46,26 +44,18 @@ const HashtagInput = forwardRef((props, ref) => {
       let newHashtags = [...hashtags]
       for (const tag of inputTags) {
         if (newHashtags.length >= 5) {
-          Swal.fire({
-            title: '最多只能新增 5 個 hashtag',
-            showClass: {
-              popup: 'animate__animated animate__fadeInUp animate__faster',
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutDown animate__faster',
-            },
+          // 替換為統一樣式
+          errorAlert.fire({
+            icon: 'error',
+            title: '最多只能新增 5 個 hashtag'
           })
           break
         }
         if (newHashtags.includes(tag)) {
-          Swal.fire({
-            title: 'Hashtag 不可以重複',
-            showClass: {
-              popup: 'animate__animated animate__fadeInUp animate__faster',
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutDown animate__faster',
-            },
+          // 替換為統一樣式
+          errorAlert.fire({
+            icon: 'error',
+            title: 'Hashtag 不可以重複'
           })
           continue
         }
@@ -87,33 +77,32 @@ const HashtagInput = forwardRef((props, ref) => {
       </label>
       <input
         type="text"
-        className={`form-control ${styles['form-control']}`}
+        className={`form-control ${styles['form-control']} ${styles['hashtag-responsive-input']}`}
         id="hashtag-input"
         placeholder="請輸入 hashtag，必須以 # 起頭，按 Enter 新增"
         value={hashtagInput}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
-      <div id="hashtag-preview" className="flex-wrap gap-2 mt-2 d-flex">
+      <div id="hashtag-preview" className="d-flex flex-wrap mt-2">
         {hashtags.map((tag, index) => (
-          <div
+          <span
             key={index}
-            className={`badge d-flex align-items-center rounded-pill ${styles['y-hashtag']}`}
+            className={`badge bg-secondary me-2 mb-2 ${styles['hashtag-badge']}`}
           >
             {tag}
-            <button
-              type="button"
-              className={`btn-close ${styles['y-close-btn']} ms-2`}
+            <span
+              className={styles['hashtag-remove-icon']}
               onClick={() => removeHashtag(index)}
-              aria-label="Close"
-            ></button>
-          </div>
+            >
+              ×
+            </span>
+          </span>
         ))}
       </div>
     </div>
   )
 })
 
-HashtagInput.displayName = 'HashtagInput' // 設置 display name
-
+HashtagInput.displayName = 'HashtagInput'
 export default HashtagInput

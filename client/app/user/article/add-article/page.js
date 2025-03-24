@@ -13,6 +13,7 @@ import HashtagInput from './hashtag-input'
 import ButtonGroup from './ButtonGroup'
 import Sidenav from '../../_components/Sidenav/page'
 import useAuth from '@/hooks/use-auth'
+import { errorAlert, successAlert, autoCloseAlert } from '@/utils/sweetAlertConfig'
 const FroalaEditor = dynamic(() => import('./froalaEditor'), { ssr: false })
 
 export const checkRequiredFields = () => {
@@ -88,15 +89,10 @@ export default function AddArticlePage() {
     const allFilled = checkRequiredFields()
     if (!allFilled) {
       setHasError(true)
-      Swal.fire({
+      errorAlert.fire({
         icon: 'error',
         title: '錯誤',
-        text: '請填寫所有必填欄位',
-        customClass: {
-          confirmButton: "btn-custom-confirm-OK",
-          popup: "y-custom-popup"
-        },
-        buttonsStyling: false
+        text: '請填寫所有必填欄位'
       })
       return
     }
@@ -149,26 +145,20 @@ export default function AddArticlePage() {
       )
 
       // 文章成功發布後，顯示無按鈕、自動關閉的成功彈窗
-      Swal.fire({
+      autoCloseAlert.fire({
         icon: 'success',
-        title: '成功',
-        text: '文章已成功發布',
-        timer: 1000, // 2秒後自動關閉
-        timerProgressBar: true, // 顯示倒計時進度條
-        showConfirmButton: false, // 隱藏確認按鈕
-        customClass: {
-          popup: "y-custom-popup"
-        }
+        title: '新增成功',
+        text: '文章已成功發布'
       }).then(() => {
         confirmClose()
       })
     } catch (error) {
-      Swal.fire({
+      console.error('新增文章時發生錯誤:', error)
+      errorAlert.fire({
         icon: 'error',
         title: 'Oops...',
-        text: '出現問題囉，請稍後再試',
+        text: '發布失敗，請稍後再試'
       })
-      console.error('Error adding article:', error)
     }
   }, [confirmClose, token]) // 注意：確保 token 是 useAuth 回傳的一部份
 

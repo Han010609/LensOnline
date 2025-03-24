@@ -17,6 +17,8 @@ import { IoIosArrowUp } from 'react-icons/io'
 import dynamic from "next/dynamic";
 import { SocketProvider } from './_components/chat/context/socketContext';
 import ScrollTopButton from "@/app/_components/top-btn/page.js"
+import CustomHead from '@/app/head'
+
 const Loading = dynamic(() => import("@/app/_components/loading/page.js"), { ssr: false });
 
 const notoSansTC = Noto_Sans_TC({
@@ -106,8 +108,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="zh-TW" className={`${notoSansTC.className} ${inter.className}`}>
       <body>
+      <CustomHead />
         {isExcluded ? (
-
           <main>{isLoading ? <Loading /> : children}</main>
         ) : (
 
