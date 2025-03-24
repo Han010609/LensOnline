@@ -13,7 +13,7 @@ function AsideComponent({ categoryId, title, subtitle, content, articleId }) {
   useEffect(() => {
     const fetchRelatedArticles = async () => {
       try {
-        const url = 'https://lenstudio.onrender.com/api/articles/related'
+        const url = 'https://lensonline.onrender.com/api/articles/related'
         const response = await fetch(url, {
           method: 'POST',
           headers: {

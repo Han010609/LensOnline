@@ -32,7 +32,7 @@ export default function FilterSidebar({ onFilterChange }) {
   useEffect(() => {
     async function fetchFilters() {
       try {
-        const response = await fetch("https://lenstudio.onrender.com/api/product/filters");
+        const response = await fetch("https://lensonline.onrender.com/api/product/filters");
         if (!response.ok) throw new Error("HTTP 錯誤 " + response.status);
         const data = await response.json();
 

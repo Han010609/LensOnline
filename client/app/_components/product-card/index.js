@@ -18,7 +18,7 @@ export default function ProductCardIndex() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const res = await fetch('https://lenstudio.onrender.com/api/product')
+        const res = await fetch('https://lensonline.onrender.com/api/product')
         if (!res.ok) throw new Error("API 請求失敗")
 
         const data = await res.json()
@@ -342,22 +342,22 @@ export default function ProductCardIndex() {
           onClick={scrollRight}
           className={`${styles.navButton} ${styles.navButtonRight}`}
 
-//     <div className={`${styles.productArea} text-white py-5`}>
-//       <div className="mx-5 py-5">
-//         <h2 className={`${styles.productTitle} text-left mb-4 ps-4`}>商品推薦</h2>
+        //     <div className={`${styles.productArea} text-white py-5`}>
+        //       <div className="mx-5 py-5">
+        //         <h2 className={`${styles.productTitle} text-left mb-4 ps-4`}>商品推薦</h2>
 
-//         {/* Swiper 輪播區塊 */}
-//         <Swiper
-//           modules={[Pagination]}
-//           spaceBetween={20}
-//           slidesPerView={1}
-//           breakpoints={{
-//             768: { slidesPerView: 2 },
-//             1024: { slidesPerView: 3 },
-//             1280: { slidesPerView: 4 }
-//           }}
-//           pagination={{ clickable: true }}
-//           className={styles.mySwiper}
+        //         {/* Swiper 輪播區塊 */}
+        //         <Swiper
+        //           modules={[Pagination]}
+        //           spaceBetween={20}
+        //           slidesPerView={1}
+        //           breakpoints={{
+        //             768: { slidesPerView: 2 },
+        //             1024: { slidesPerView: 3 },
+        //             1280: { slidesPerView: 4 }
+        //           }}
+        //           pagination={{ clickable: true }}
+        //           className={styles.mySwiper}
 
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 16">

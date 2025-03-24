@@ -13,7 +13,7 @@ export default function ImageGallery({ productId }) {
   useEffect(() => {
     async function fetchProductData() {
       try {
-        const response = await fetch(`https://lenstudio.onrender.com/api/product/${productId}`);
+        const response = await fetch(`https://lensonline.onrender.com/api/product/${productId}`);
         if (!response.ok) throw new Error("無法獲取商品資料");
 
         const data = await response.json();

@@ -66,7 +66,7 @@ export default function RegisterPage() {
         formDataToSend.append('avatar', formData.avatar);
       }
 
-      const response = await fetch('https://lenstudio.onrender.com/api/users', {
+      const response = await fetch('https://lensonline.onrender.com/api/users', {
         method: 'POST',
         body: formDataToSend,
       });

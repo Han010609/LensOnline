@@ -17,7 +17,7 @@ export default function Coupon() {
 
   const fetchCoupons = async () => {
     try {
-      const response = await fetch("https://lenstudio.onrender.com/api/myorders/coupon", {
+      const response = await fetch("https://lensonline.onrender.com/api/myorders/coupon", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();

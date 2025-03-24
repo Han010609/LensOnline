@@ -14,7 +14,7 @@ const pool = mysql.createPool({
 })
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:5000','https://lenstudio.vercel.app/'],
+  origin: ['http://localhost:3000', 'http://localhost:5000', 'https://lensonline.vercel.app/'],
   credentials: true, // 確保 credentials 為 true
 }
 

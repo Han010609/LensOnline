@@ -87,7 +87,7 @@ export default function ArticleDetail() {
     // 開始載入資料時，設定 loading 為 true
     setLoading(true);
 
-    fetch(`https://lenstudio.onrender.com/api/articles/${id}`)
+    fetch(`https://lensonline.onrender.com/api/articles/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Network response was not ok: ${res.status}`)
@@ -107,7 +107,7 @@ export default function ArticleDetail() {
           setTags(response.data.tags)
           // 直接使用 API 回傳的 user 物件
           setArticleUser(response.data.user)
-          return fetch(`https://lenstudio.onrender.com/api/articles/categories`)
+          return fetch(`https://lensonline.onrender.com/api/articles/categories`)
             .then((res) => {
               if (!res.ok) {
                 throw new Error(`Network response was not ok: ${res.status}`)

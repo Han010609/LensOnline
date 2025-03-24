@@ -13,7 +13,7 @@ import pool from '../db.js'
 
 //cors設定
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:5000','https://lenstudio.vercel.app/'],
+  origin: ['http://localhost:3000', 'http://localhost:5000', 'https://lensonline.vercel.app/'],
   credentials: true,
 }
 
@@ -23,7 +23,7 @@ router.use(cors(corsOptions))
 // 取得所有文章（僅撈出尚未刪除的文章）
 router.get('/', async (req, res) => {
   const { year, month, category, search, tag, user_id, fields } = req.query;
-  
+
   // 解析搜尋範圍，默認為 title,subtitle,tag,user
   const searchFields = fields ? fields.split(',') : ['title', 'subtitle', 'tag', 'user'];
 
@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
     tag || '',
     `%${search || ''}%`,
   ];
-  
+
   // 如果搜索範圍包含副標題，添加相應參數
   if (searchFields.includes('subtitle')) {
     queryParams.push(`%${search || ''}%`);
@@ -77,29 +77,29 @@ router.get('/', async (req, res) => {
 
   if (search && !tag) {
     const searchConditions = [];
-    
+
     // 只在指定的欄位搜尋
     if (searchFields.includes('tag')) {
       searchConditions.push('t.tag_name LIKE ?');
       queryParams.push(`%${search}%`);
     }
-    
+
     if (searchFields.includes('title')) {
       searchConditions.push('a.title LIKE ?');
       queryParams.push(`%${search}%`);
     }
-    
+
     if (searchFields.includes('subtitle')) {
       searchConditions.push('a.subtitle LIKE ?');
       queryParams.push(`%${search}%`);
     }
-    
+
     if (searchFields.includes('user')) {
       searchConditions.push('u.name LIKE ?');
       searchConditions.push('u.nickname LIKE ?');
       queryParams.push(`%${search}%`, `%${search}%`);
     }
-    
+
     if (searchConditions.length > 0) {
       conditions.push(`(${searchConditions.join(' OR ')})`);
     }

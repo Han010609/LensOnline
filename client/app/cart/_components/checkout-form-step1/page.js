@@ -90,7 +90,7 @@ export default function CheckoutFormStep1({ slItem }) {
     if (!decoded) return;
 
     try {
-      const response = await fetch(`https://lenstudio.onrender.com/api/coupon?id=${decoded.id}`, {
+      const response = await fetch(`https://lensonline.onrender.com/api/coupon?id=${decoded.id}`, {
         method: "GET",
       });
 

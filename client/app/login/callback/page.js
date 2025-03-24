@@ -18,7 +18,7 @@ export default function Callback() {
         // console.log("LINE 授權碼:", code);
 
         // 1️⃣ 先發送 `code` 到後端，讓後端換取 `access_token`
-        const backendResponse = await axios.post("https://lenstudio.onrender.com/api/auth/line", {
+        const backendResponse = await axios.post("https://lensonline.onrender.com/api/auth/line", {
           code,
         });
 

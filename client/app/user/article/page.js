@@ -74,7 +74,7 @@ export default function UserPage() {
     let timer;
     if (user && token) {
       axios
-        .get(`https://lenstudio.onrender.com/api/articles?user_id=${user.id}`, {
+        .get(`https://lensonline.onrender.com/api/articles?user_id=${user.id}`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         .then((res) => {
@@ -155,7 +155,7 @@ export default function UserPage() {
         }).then((result) => {
           if (result.isConfirmed) {
             // 呼叫 API 更新 is_deleted 為1
-            axios.delete(`https://lenstudio.onrender.com/api/articles/${articleId}`, {
+            axios.delete(`https://lensonline.onrender.com/api/articles/${articleId}`, {
               headers: {
                 Authorization: `Bearer ${token}` // token須來自 useAuth 狀態
               }
@@ -283,7 +283,7 @@ export default function UserPage() {
                       queryParams.append('month', filters.month)
                     }
 
-                    axios.get(`https://lenstudio.onrender.com/api/articles?${queryParams}`, {
+                    axios.get(`https://lensonline.onrender.com/api/articles?${queryParams}`, {
                       headers: { Authorization: `Bearer ${token}` }
                     })
                       .then(res => {

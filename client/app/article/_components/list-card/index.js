@@ -23,7 +23,7 @@ const ListCard = ({ article, onTagClick, onAuthorClick, searchTerm }) => {
   // 當 article.user_id 存在時，去取得使用者的 nickname 與 head 圖片
   useEffect(() => {
     if (article.user_id) {
-      fetch(`https://lenstudio.onrender.com/api/users/${article.user_id}`)
+      fetch(`https://lensonline.onrender.com/api/users/${article.user_id}`)
         .then((res) => res.json())
         .then((data) => {
           console.log('使用者資料：', data) // 檢查回傳

@@ -16,7 +16,7 @@ export const CourseProvider = ({ children }) => {
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      const res = await fetch("https://lenstudio.onrender.com/api/courses");
+      const res = await fetch("https://lensonline.onrender.com/api/courses");
       if (!res.ok) throw new Error("❌ 無法獲取課程列表");
       const data = await res.json();
       setCourses(data);
@@ -32,7 +32,7 @@ export const CourseProvider = ({ children }) => {
   const fetchCourseById = async (courseId) => {
     setLoading(true);
     try {
-      const res = await fetch(`https://lenstudio.onrender.com/api/courses/${courseId}`);
+      const res = await fetch(`https://lensonline.onrender.com/api/courses/${courseId}`);
       if (!res.ok) throw new Error("❌ 無法獲取課程");
       const data = await res.json();
       setCourse(data);
@@ -51,7 +51,7 @@ export const CourseProvider = ({ children }) => {
   const addCourse = async (newCourse) => {
     setLoading(true);
     try {
-      const res = await fetch("https://lenstudio.onrender.com/api/courses", {
+      const res = await fetch("https://lensonline.onrender.com/api/courses", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCourse),
@@ -71,7 +71,7 @@ export const CourseProvider = ({ children }) => {
   const updateCourse = async (courseId, updatedData) => {
     setLoading(true);
     try {
-      const res = await fetch(`https://lenstudio.onrender.com/api/courses/${courseId}`, {
+      const res = await fetch(`https://lensonline.onrender.com/api/courses/${courseId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedData),
@@ -96,7 +96,7 @@ export const CourseProvider = ({ children }) => {
   const deleteCourse = async (courseId) => {
     setLoading(true);
     try {
-      const res = await fetch(`https://lenstudio.onrender.com/api/courses/${courseId}`, {
+      const res = await fetch(`https://lensonline.onrender.com/api/courses/${courseId}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("❌ 刪除課程失敗");

@@ -30,7 +30,7 @@ export default function UserArticleFilter({ onFilterChange, resultCount }) {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          'https://lenstudio.onrender.com/api/articles/categories',
+          'https://lensonline.onrender.com/api/articles/categories',
           { signal: controller.signal }
         )
         // 不再過濾 count，全部顯示
@@ -54,7 +54,7 @@ export default function UserArticleFilter({ onFilterChange, resultCount }) {
     const fetchYears = async () => {
       try {
         const response = await axios.get(
-          'https://lenstudio.onrender.com/api/articles/years',
+          'https://lensonline.onrender.com/api/articles/years',
           { signal: controller.signal }
         )
         // 不再過濾 count，全部顯示

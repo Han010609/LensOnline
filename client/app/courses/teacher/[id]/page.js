@@ -24,7 +24,7 @@ export default function IdPage() {
 
         const fetchTeacher = async () => {
             try {
-                const response = await fetch(`https://lenstudio.onrender.com/api/teachers/${id}`);
+                const response = await fetch(`https://lensonline.onrender.com/api/teachers/${id}`);
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);

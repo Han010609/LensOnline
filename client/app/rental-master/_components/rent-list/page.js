@@ -38,7 +38,7 @@ export default function RentList() {
         }
 
         console.log('正在驗證用戶身份...');
-        const res = await fetch('https://lenstudio.onrender.com/api/rental-master/me', {
+        const res = await fetch('https://lensonline.onrender.com/api/rental-master/me', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -155,7 +155,7 @@ export default function RentList() {
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
       // 🚀 只發送一次 API
-      const res = await fetch(`https://lenstudio.onrender.com/api/rental?${params.toString()}`, { headers });
+      const res = await fetch(`https://lensonline.onrender.com/api/rental?${params.toString()}`, { headers });
       const data = await res.json();
 
       if (data.success) {

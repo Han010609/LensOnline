@@ -179,7 +179,7 @@ router.post("/messages", authenticate, upload.single("upload"), async (req, res)
     if (req.file) {
       messageType = "image";
       const filePath = `/uploads/images/chat-messages/${req.file.filename}`;
-      messageContent = `https://lenstudio.onrender.com${filePath}`; // 🔹 加上完整 URL
+      messageContent = `https://lensonline.onrender.com${filePath}`; // 🔹 加上完整 URL
       // console.log("📂 圖片已成功上傳:", messageContent);
     }
 

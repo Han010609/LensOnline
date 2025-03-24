@@ -19,7 +19,7 @@ const editorConfig = {
             formData.append('upload', file)
 
             const response = await fetch(
-              'https://lenstudio.onrender.com/api/course-ct-upload',
+              'https://lensonline.onrender.com/api/course-ct-upload',
               {
                 method: 'POST',
                 body: formData,
@@ -28,7 +28,7 @@ const editorConfig = {
 
             const data = await response.json()
             // console.log('✅ 圖片上傳成功，URL:', data.url)
-            return { default: `https://lenstudio.onrender.com${data.url}` }
+            return { default: `https://lensonline.onrender.com${data.url}` }
           },
         }
       }
@@ -126,7 +126,7 @@ export default function CourseCreate() {
 
     try {
       const response = await fetch(
-        'https://lenstudio.onrender.com/api/course-cv-upload',
+        'https://lensonline.onrender.com/api/course-cv-upload',
         {
           method: 'POST',
           body: formData,
@@ -139,7 +139,7 @@ export default function CourseCreate() {
       }
 
       const data = await response.json()
-      const fullUrl = `https://lenstudio.onrender.com${data.url}` // ✅ 修正 URL
+      const fullUrl = `https://lensonline.onrender.com${data.url}` // ✅ 修正 URL
 
       // console.log('✅ 圖片上傳成功，URL:', fullUrl)
 
@@ -156,7 +156,7 @@ export default function CourseCreate() {
     e.preventDefault();
     setLoading(true);
 
-    const apiUrl = 'https://lenstudio.onrender.com/api/courses';
+    const apiUrl = 'https://lensonline.onrender.com/api/courses';
     // console.log('🚀 發送 `POST` 請求到:', apiUrl);
 
     try {

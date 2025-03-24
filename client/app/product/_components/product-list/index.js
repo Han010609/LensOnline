@@ -15,7 +15,7 @@ export default function ProductList({ filters, sort }) {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        let url = "https://lenstudio.onrender.com/api/product";
+        let url = "https://lensonline.onrender.com/api/product";
         const query = new URLSearchParams();
 
         if (filters.brand_id.length) query.append("brand_id", filters.brand_id.join(","));

@@ -139,7 +139,7 @@ export default function AddArticleModal({ onClose }) {
       }
 
       // 向後端送出資料
-      await axios.post('https://lenstudio.onrender.com/api/articles', {
+      await axios.post('https://lensonline.onrender.com/api/articles', {
         category: categoryId,
         title,
         subtitle,

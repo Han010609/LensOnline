@@ -87,11 +87,12 @@ const ArticleHomeContainer = () => {
     const fetchLatestArticles = async () => {
       try {
         // 獲取最新的5篇文章
-        const response = await axios.get("https://lenstudio.onrender.com/api/articles/latest?limit=5");
+        const response = await axios.get("https://lensonline.onrender.com/api/articles/latest?limit=5");
         if (response.data && response.data.data) {
           setArticles(response.data.data);
         }
       } catch (error) {
+        s
         console.error("獲取最新文章失敗:", error);
       } finally {
         setLoading(false);

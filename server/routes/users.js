@@ -13,7 +13,7 @@ const portNum = 3005;
 
 
 
-const whiteList = ["http://localhost:5500", "http://localhost:8000", "http://localhost:3000",'https://lenstudio.vercel.app'];
+const whiteList = ["http://localhost:5500", "http://localhost:8000", "http://localhost:3000", 'https://lensonline.vercel.app'];
 const corsOptions = {
   credentials: true,
   origin(origin, callback) {
@@ -246,7 +246,7 @@ router.get('/addresses/me', checkToken, async (req, res) => {
       [user_id]
     );
 
-    
+
 
     res.status(200).json({
       status: 'success',
@@ -375,11 +375,11 @@ router.put("/:account", checkToken, upload.none(), async (req, res) => {
         "SELECT id FROM users WHERE nickname = ? AND account != ?",
         [nickname, account]
       );
-    
+
       if (existingNicknames.length > 0) {
         throw new Error("此暱稱已被使用，請選擇其他暱稱");
       }
-    
+
       updateFields.push("`nickname` = ?");
       value.push(nickname);
     }
@@ -684,7 +684,7 @@ router.get("/favorites/me", checkToken, async (req, res) => {
   WHERE c.user_id = ? AND c.rent_id IS NOT NULL;`,
       [userId]
     );
-    
+
 
     // 查詢用戶收藏的文章
     const [articles] = await connection.query(
@@ -710,7 +710,7 @@ router.get("/favorites/me", checkToken, async (req, res) => {
     if (products.length === 0 && courses.length === 0 && rents.length === 0 && articles.length === 0) {
       return res.json({ products: [], courses: [], rents: [], articles: [] });
     }
-    
+
 
     res.json({ products, courses, rents, articles });
   } catch (error) {

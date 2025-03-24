@@ -77,7 +77,7 @@ export default function SupportChat() {
         is_bot: true,
       }
 
-      const res = await fetch('https://lenstudio.onrender.com/api/support/messages', {
+      const res = await fetch('https://lensonline.onrender.com/api/support/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ export default function SupportChat() {
 
       // console.log(`📡 正在請求對話 ${chatId} 的所有訊息...`)
       const res = await fetch(
-        `https://lenstudio.onrender.com/api/support/messages/${chatId}`,
+        `https://lensonline.onrender.com/api/support/messages/${chatId}`,
         {
           method: 'GET',
           headers: {
@@ -218,7 +218,7 @@ export default function SupportChat() {
 
   useEffect(() => {
     // console.log("嘗試建立 socket 連線...");
-    const newSocket = io("https://lenstudio.onrender.com/");
+    const newSocket = io("https://lensonline.onrender.com/");
     // console.log("建立 socket 成功:", newSocket.id);
 
     setSocket(newSocket);
@@ -311,7 +311,7 @@ export default function SupportChat() {
         is_bot: true, // 標記為自動訊息
       }
 
-      const res = await fetch('https://lenstudio.onrender.com/api/support/messages', {
+      const res = await fetch('https://lensonline.onrender.com/api/support/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -342,7 +342,7 @@ export default function SupportChat() {
     try {
       // 建立新聊天室
       const res = await fetch(
-        'https://lenstudio.onrender.com/api/support/conversations',
+        'https://lensonline.onrender.com/api/support/conversations',
         {
           method: 'POST',
           headers: {
@@ -375,7 +375,7 @@ export default function SupportChat() {
     try {
       const token = localStorage.getItem('loginWithToken')
       const res = await fetch(
-        'https://lenstudio.onrender.com/api/support/conversations',
+        'https://lensonline.onrender.com/api/support/conversations',
         {
           method: 'GET',
           headers: {
@@ -446,7 +446,7 @@ export default function SupportChat() {
     // console.log("📩 準備發送訊息:", { text, file });
 
     try {
-      const res = await fetch("https://lenstudio.onrender.com/api/support/messages", {
+      const res = await fetch("https://lensonline.onrender.com/api/support/messages", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -530,7 +530,7 @@ export default function SupportChat() {
                         src={
                           chat.user_avatar
                             ? `http://localhost:3000${chat.user_avatar}`
-                            : 'http://localhost:3000/uploads/1741674302756-lenstudio.jpg'
+                            : 'http://localhost:3000/uploads/1741674302756-lensonline.jpg'
                         }
                         className={styles.infoAvatar}
                         alt="User Avatar"
@@ -604,7 +604,7 @@ export default function SupportChat() {
                         src={
                           msg.user_avatar
                             ? `http://localhost:3000${msg.user_avatar}`
-                            : 'http://localhost:3000/uploads/1741674302756-lenstudio.jpg'
+                            : 'http://localhost:3000/uploads/1741674302756-lensonline.jpg'
                         }
                         className={styles.avatar}
                         alt="User Avatar"

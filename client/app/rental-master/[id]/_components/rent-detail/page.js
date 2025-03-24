@@ -35,7 +35,7 @@ export default function RentDetail() {
         }
 
         console.log('正在驗證用戶身份...');
-        const res = await fetch('https://lenstudio.onrender.com/api/rental-master/me', {
+        const res = await fetch('https://lensonline.onrender.com/api/rental-master/me', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -78,10 +78,10 @@ export default function RentDetail() {
         const token = localStorage.getItem('loginWithToken');
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-        console.log(`Fetching rental detail: https://lenstudio.onrender.com/api/rental/${id}`)
+        console.log(`Fetching rental detail: https://lensonline.onrender.com/api/rental/${id}`)
 
 
-        const response = await fetch(`https://lenstudio.onrender.com/api/rental/${id}`, { headers })
+        const response = await fetch(`https://lensonline.onrender.com/api/rental/${id}`, { headers })
         const data = await response.json()
 
         console.log("API Response:", data) // ✅ 確保 API 回應正確

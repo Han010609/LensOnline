@@ -31,7 +31,7 @@ export default function RentDetail() {
         const token = localStorage.getItem('loginWithToken');
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-        const response = await fetch(`https://lenstudio.onrender.com/api/rental/${id}`, { headers })
+        const response = await fetch(`https://lensonline.onrender.com/api/rental/${id}`, { headers })
         const data = await response.json()
 
         if (data.success) {

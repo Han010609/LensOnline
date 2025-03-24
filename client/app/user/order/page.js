@@ -15,7 +15,7 @@ export default function UserPage() {
 
     useEffect(() => {
         if (token) {
-            axios.get('https://lenstudio.onrender.com/api/myorders/order', {
+            axios.get('https://lensonline.onrender.com/api/myorders/order', {
                 headers: { Authorization: `Bearer ${token}` }
             })
                 .then(response => setOrders(response.data.orders))

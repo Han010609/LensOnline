@@ -17,7 +17,7 @@ export default function CoursesCategory({ selectedCategory, setSelectedCategory 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch('https://lenstudio.onrender.com/api/courses/categories');
+        const res = await fetch('https://lensonline.onrender.com/api/courses/categories');
         if (!res.ok) throw new Error(`HTTP 錯誤！狀態碼：${res.status}`);
 
         const data = await res.json();

@@ -39,7 +39,7 @@ export default function loginPage() {
   // 登入處理，根據 level 導向不同頁面
   const handleLogin = async (e) => {
     e.preventDefault();
-    const API = "https://lenstudio.onrender.com/api/users/login";
+    const API = "https://lensonline.onrender.com/api/users/login";
 
     try {
       const res = await fetch(API, {

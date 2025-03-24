@@ -31,7 +31,7 @@ export default function CourseManagement() {
         }
 
         // console.log('📡 正在發送請求取得使用者資訊...');
-        const userRes = await fetch('https://lenstudio.onrender.com/api/teachers/me', {
+        const userRes = await fetch('https://lensonline.onrender.com/api/teachers/me', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -85,10 +85,10 @@ export default function CourseManagement() {
         let coursesUrl = "";
 
         if (user.level === 1) {
-          coursesUrl = "https://lenstudio.onrender.com/api/teachers/me/courses";
+          coursesUrl = "https://lensonline.onrender.com/api/teachers/me/courses";
         } else if (user.level === 88) {
           // console.log("🔹 管理員登入");
-          coursesUrl = "https://lenstudio.onrender.com/api/teachers/admin/courses";
+          coursesUrl = "https://lensonline.onrender.com/api/teachers/admin/courses";
         } else {
           console.warn("⚠️ 無權限訪問，跳轉到 /");
           router.push("/");
@@ -149,7 +149,7 @@ export default function CourseManagement() {
     if (result.isConfirmed) {
       try {
         const token = localStorage.getItem("loginWithToken");
-        const res = await fetch(`https://lenstudio.onrender.com/api/courses/${courseId}/delete`, {
+        const res = await fetch(`https://lensonline.onrender.com/api/courses/${courseId}/delete`, {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         });
@@ -198,7 +198,7 @@ export default function CourseManagement() {
     try {
       const token = localStorage.getItem("loginWithToken");
 
-      const res = await fetch(`https://lenstudio.onrender.com/api/courses/${courseId}/status`, {
+      const res = await fetch(`https://lensonline.onrender.com/api/courses/${courseId}/status`, {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,

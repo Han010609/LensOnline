@@ -34,7 +34,7 @@ const nextConfig = {
       {
         // 所有 API 請求轉發到後端
         source: '/api/:path*',
-        destination: 'https://lenstudio.onrender.com/api/:path*',
+        destination: 'https://lensonline.onrender.com/api/:path*',
         // 移除 has 條件限制
       },
       {

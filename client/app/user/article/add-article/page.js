@@ -128,7 +128,7 @@ export default function AddArticlePage() {
       // 透過 useAuth 取得 token
       // 假設你從 useAuth hook 已取得 token
       await axios.post(
-        'https://lenstudio.onrender.com/api/articles',
+        'https://lensonline.onrender.com/api/articles',
         {
           category,
           title,

@@ -19,7 +19,7 @@ export default function RentCard() {
       return;
     }
 
-    fetch("https://lenstudio.onrender.com/api/myorders/course", {
+    fetch("https://lensonline.onrender.com/api/myorders/course", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

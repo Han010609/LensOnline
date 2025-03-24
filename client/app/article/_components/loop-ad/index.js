@@ -15,7 +15,7 @@ export default function LoopAd() {
   useEffect(() => {
     const fetchAdsData = async () => {
       try {
-        const response = await fetch('https://lenstudio.onrender.com/api/product/ads')
+        const response = await fetch('https://lensonline.onrender.com/api/product/ads')
         if (!response.ok) {
           console.error(`API 請求失敗，狀態碼：${response.status}`)
           const text = await response.text()

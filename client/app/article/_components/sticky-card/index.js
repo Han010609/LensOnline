@@ -17,7 +17,7 @@ export default function StickyCard() {
     const fetchArticle = async () => {
       try {
         // 從 API 取得 user_id=48 的文章資料
-        const response = await fetch('https://lenstudio.onrender.com/api/articles?user_id=48');
+        const response = await fetch('https://lensonline.onrender.com/api/articles?user_id=48');
         const json = await response.json();
         const articles = json.data || json;
         if (articles && articles.length > 0) {

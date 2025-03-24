@@ -29,7 +29,7 @@ export function CompareProvider({ children }) {
 
   const fetchProductSpec = async (product) => {
     try {
-      const response = await fetch(`https://lenstudio.onrender.com/api/product/spec/${product.id}`);
+      const response = await fetch(`https://lensonline.onrender.com/api/product/spec/${product.id}`);
       if (!response.ok) throw new Error("HTTP 錯誤 " + response.status);
       const data = await response.json();
       return { ...product, specs: data };

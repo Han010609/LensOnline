@@ -29,9 +29,9 @@ export default function TeacherInfo({ teacherId }) {
   useEffect(() => {
     if (!teacherId) return;
 
-    // console.log("開始請求 API:", `https://lenstudio.onrender.com/api/teachers/${teacherId}`);
+    // console.log("開始請求 API:", `https://lensonline.onrender.com/api/teachers/${teacherId}`);
 
-    fetch(`https://lenstudio.onrender.com/api/teachers/${teacherId}`)
+    fetch(`https://lensonline.onrender.com/api/teachers/${teacherId}`)
       .then((res) => {
         // console.log("API 回應狀態:", res.status);
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);

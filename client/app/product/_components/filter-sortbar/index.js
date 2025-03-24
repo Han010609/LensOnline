@@ -15,7 +15,7 @@ export default function FilterSortBar({ onBrandSelect, onSortChange }) {
   useEffect(() => {
     async function fetchBrands() {
       try {
-        const res = await fetch("https://lenstudio.onrender.com/api/product/brand");
+        const res = await fetch("https://lensonline.onrender.com/api/product/brand");
         if (!res.ok) throw new Error("無法取得品牌列表");
         const data = await res.json();
 

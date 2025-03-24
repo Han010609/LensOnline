@@ -14,7 +14,7 @@ export default function ComponentsCompareItem() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const res = await fetch('https://lenstudio.onrender.com/api/product')
+        const res = await fetch('https://lensonline.onrender.com/api/product')
         const data = await res.json()
         setAllProducts(data)
       } catch (error) {

@@ -17,7 +17,7 @@ export default function MasonryLayouts() {
     const fetchArticles = async () => {
       try {
         // 只取 user_id=48 的文章資料
-        const response = await fetch('https://lenstudio.onrender.com/api/articles?user_id=48');
+        const response = await fetch('https://lensonline.onrender.com/api/articles?user_id=48');
         const json = await response.json();
         const allArticles = json.data || json;
         // 取得 StickyCard 儲存的 stickyArticleId

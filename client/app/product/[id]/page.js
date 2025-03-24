@@ -17,7 +17,7 @@ export default function ProductDetailPage() {
     async function fetchProduct() {
       try {
         if (!id) return;
-        const response = await fetch(`https://lenstudio.onrender.com/api/product/${id}`);
+        const response = await fetch(`https://lensonline.onrender.com/api/product/${id}`);
         if (!response.ok) throw new Error("獲取商品失敗");
 
         const data = await response.json();

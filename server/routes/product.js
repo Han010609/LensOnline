@@ -28,7 +28,7 @@ const router = express.Router();
 
 //cors設定
 const corsOptions = {
-  origin: ['http://localhost:3000','https://lenstudio.vercel.app/'], // 允許來自 http://localhost:3000 的請求
+  origin: ['http://localhost:3000', 'https://lensonline.vercel.app/'], // 允許來自 http://localhost:3000 的請求
   credentials: true,
   allowedHeaders: ["Authorization", "Content-Type"],
 };

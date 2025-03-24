@@ -63,7 +63,7 @@ export default function FavoriteButton({ rentId, rental }) {
     }
 
     try {
-      const response = await fetch(`https://lenstudio.onrender.com/api/rental/collection`, {
+      const response = await fetch(`https://lensonline.onrender.com/api/rental/collection`, {
         method: isFavorite ? 'DELETE' : 'POST',
         headers: {
           'Content-Type': 'application/json',

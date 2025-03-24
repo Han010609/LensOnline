@@ -15,7 +15,7 @@ export default function FavoriteButton({ productId }) {
   useEffect(() => {
     if (!token || !productId) return;
 
-    fetch(`https://lenstudio.onrender.com/api/product/collection/${productId}`, {
+    fetch(`https://lensonline.onrender.com/api/product/collection/${productId}`, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -38,7 +38,7 @@ export default function FavoriteButton({ productId }) {
     }
     try {
       const method = isFavorite ? "DELETE" : "POST";
-      const res = await fetch("https://lenstudio.onrender.com/api/product/collection", {
+      const res = await fetch("https://lensonline.onrender.com/api/product/collection", {
         method,
         headers: {
           "Authorization": `Bearer ${token}`,

@@ -5,7 +5,7 @@ import pool from '../db.js';
 const router = express.Router();
 
 const corsOptions = {
-    origin: ['http://localhost:3000','https://lenstudio.vercel.app/'],
+    origin: ['http://localhost:3000', 'https://lensonline.vercel.app/'],
     credentials: true,
     allowedHeaders: ["Authorization", "Content-Type"],
 };
@@ -27,10 +27,10 @@ router.post("/check", async (req, res) => {
         const amount = result[0].amount || 0;
         const maxLimit = 1; // 假設每種優惠券最多可以領取 1 張
 
-        res.status(200).json({ 
-            success: true, 
-            reachedLimit: amount >= maxLimit, 
-            message: amount >= maxLimit ? "已達優惠券領取限制" : "可以領取" 
+        res.status(200).json({
+            success: true,
+            reachedLimit: amount >= maxLimit,
+            message: amount >= maxLimit ? "已達優惠券領取限制" : "可以領取"
         });
     } catch (error) {
         console.error("優惠券獲取失敗:", error);
@@ -64,7 +64,7 @@ router.post("/", async (req, res) => {
             `UPDATE coupon SET quantity = quantity - ? WHERE id = ?;`,
             [quantity, couponId]
         );
-        
+
         return res.status(200).json({ success: true, message: "優惠券獲取成功", result: insertResult });
     } catch (error) {
         console.error("優惠券獲取失敗:", error);

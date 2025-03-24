@@ -113,7 +113,7 @@ export default function ChatWidget() {
 
   useEffect(() => {
     if (isOpen && messages.some(msg => !msg.read)) {
-      markAsRead(); 
+      markAsRead();
     }
   }, [messages]);
 
@@ -267,7 +267,7 @@ export default function ChatWidget() {
       formData.append('file', fileObj.file); // 添加文件
 
       // 發送到服務器
-      const response = await fetch('https://lenstudio.onrender.com/api/uploads', {
+      const response = await fetch('https://lensonline.onrender.com/api/uploads', {
         method: 'POST',
         body: formData,
       });
@@ -405,7 +405,7 @@ export default function ChatWidget() {
 
   useEffect(() => {
     if (!socketContext || !socketContext.socket) return;
-  
+
     const handleMessagesRead = (payload) => {
       console.log('收到訊息已讀更新(user端):', payload);
       // 統一取得 messageIds (如果 payload 是陣列，直接使用；如果是物件則取 payload.messageIds)
@@ -415,9 +415,9 @@ export default function ChatWidget() {
         messageIds.includes(msg.id) ? { ...msg, read: true } : msg
       ));
     };
-  
+
     socketContext.socket.on('messages_read', handleMessagesRead);
-  
+
     return () => {
       socketContext.socket.off('messages_read', handleMessagesRead);
     };

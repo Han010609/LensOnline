@@ -26,7 +26,7 @@ export default function FavoriteButton({ courseId }) {
       const checkFavoriteStatus = async () => {
         try {
           const res = await fetch(
-            `https://lenstudio.onrender.com/api/courses/collection/${courseId}`,
+            `https://lensonline.onrender.com/api/courses/collection/${courseId}`,
             {
               method: 'GET',
               headers: {
@@ -70,10 +70,10 @@ export default function FavoriteButton({ courseId }) {
 
     try {
       const method = isFavorite ? "DELETE" : "POST";
-      let url = "https://lenstudio.onrender.com/api/courses/collection";
+      let url = "https://lensonline.onrender.com/api/courses/collection";
 
       if (method === "DELETE") {
-        url = `https://lenstudio.onrender.com/api/courses/collection/${courseId}`; // ✅ 確保 DELETE 傳入 courseId
+        url = `https://lensonline.onrender.com/api/courses/collection/${courseId}`; // ✅ 確保 DELETE 傳入 courseId
       }
 
       console.log("📌 送出的請求:", method, url);

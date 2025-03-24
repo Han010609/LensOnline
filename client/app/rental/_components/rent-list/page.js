@@ -134,7 +134,7 @@ export default function RentList() {
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
       // 🚀  只發送一次 API
-      const res = await fetch(`https://lenstudio.onrender.com/api/rental?${params.toString()}`, { headers });
+      const res = await fetch(`https://lensonline.onrender.com/api/rental?${params.toString()}`, { headers });
       const data = await res.json();
 
       if (data.success) {

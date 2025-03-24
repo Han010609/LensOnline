@@ -41,7 +41,7 @@ export default function UserPage(props) {
     setUpdating(true); // 進入「處理中」狀態
     try {
       const response = await fetch(
-        `https://lenstudio.onrender.com/api/users/${user.account}`, // 🔹 使用者帳號
+        `https://lensonline.onrender.com/api/users/${user.account}`, // 🔹 使用者帳號
         {
           method: 'PUT',
           headers: {

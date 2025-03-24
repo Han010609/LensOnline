@@ -10,7 +10,7 @@ const useArticles = (filter = {}) => {
     const fetchArticles = async () => {
       setLoading(true)
       try {
-        let url = 'https://lenstudio.onrender.com/api/articles'
+        let url = 'https://lensonline.onrender.com/api/articles'
         const queryParams = new URLSearchParams()
 
         if (filter.year) queryParams.append('year', filter.year) //如果有年份就加入queryParams

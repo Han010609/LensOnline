@@ -5,13 +5,13 @@ import core from 'cors'
 import jwt from 'jsonwebtoken'
 
 const upload = multer();
-const whiteList = ['http://localhost:5500', 'http://localhost:3000','https://lenstudio.vercel.app']
+const whiteList = ['http://localhost:5500', 'http://localhost:3000', 'https://lensonline.vercel.app']
 const corsOptions = {
   credentials: true,
-  origin(origin, callback){
-    if(!origin || whiteList.includes(origin)){
+  origin(origin, callback) {
+    if (!origin || whiteList.includes(origin)) {
       callback(null, true)
-    }else{
+    } else {
       callback(new Error('不允許連線'))
     }
   }
@@ -24,10 +24,10 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 router.get('/user', (req, res) => {
-  res.json({status: "success", data: null, message: "首頁"});
+  res.json({ status: "success", data: null, message: "首頁" });
 })
 
-router.list(3005, ()=>{
+router.list(3005, () => {
   console.log("API 運行中...");
 })
 

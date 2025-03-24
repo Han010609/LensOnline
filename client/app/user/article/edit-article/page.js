@@ -59,7 +59,7 @@ export default function EditArticlePage() {
   useEffect(() => {
     const fetchArticleData = async () => {
       try {
-        const response = await axios.get(`https://lenstudio.onrender.com/api/articles/${articleId}`)
+        const response = await axios.get(`https://lensonline.onrender.com/api/articles/${articleId}`)
         const article = response.data.data
         setArticleData(article)
 
@@ -178,7 +178,7 @@ export default function EditArticlePage() {
       console.log('使用圖片路徑:', currentImagePath);
 
       // 發送請求
-      await axios.put(`https://lenstudio.onrender.com/api/articles/${articleId}`, {
+      await axios.put(`https://lensonline.onrender.com/api/articles/${articleId}`, {
         category: categorySelect.value,
         title: titleInput.value.trim(),
         subtitle: subtitleInput ? subtitleInput.value.trim() : '',

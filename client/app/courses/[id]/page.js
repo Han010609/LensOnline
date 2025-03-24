@@ -36,7 +36,7 @@ export default function CourseDetailPage() {
 
     const fetchCourse = async () => {
       try {
-        const API_URL = `https://lenstudio.onrender.com/api/courses/${id}`
+        const API_URL = `https://lensonline.onrender.com/api/courses/${id}`
         // console.log('發送 API 請求:', API_URL)
 
         const res = await fetch(API_URL)

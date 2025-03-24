@@ -43,7 +43,7 @@ export default function AuthModal({ show, onHide, onLoginSuccess }) {
     setLoading(true)
     setError('')
 
-    const API = 'https://lenstudio.onrender.com/api/users/login'
+    const API = 'https://lensonline.onrender.com/api/users/login'
 
     try {
       const res = await fetch(API, {

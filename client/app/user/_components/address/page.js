@@ -19,7 +19,7 @@ const AddressManager = () => {
     }
 
     try {
-      const response = await fetch("https://lenstudio.onrender.com/api/users/addresses/me", {
+      const response = await fetch("https://lensonline.onrender.com/api/users/addresses/me", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -64,7 +64,7 @@ const AddressManager = () => {
 
     if (newAddress && newAddress !== currentAddress) {
       try {
-        const response = await fetch(`https://lenstudio.onrender.com/api/users/addresses/${addressId}`, {
+        const response = await fetch(`https://lensonline.onrender.com/api/users/addresses/${addressId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -101,7 +101,7 @@ const AddressManager = () => {
 
     if (isConfirmed) {
       try {
-        const response = await fetch(`https://lenstudio.onrender.com/api/users/addresses/${addressId}`, {
+        const response = await fetch(`https://lensonline.onrender.com/api/users/addresses/${addressId}`, {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -139,7 +139,7 @@ const AddressManager = () => {
 
     if (address) {
       try {
-        const response = await fetch("https://lenstudio.onrender.com/api/users/addresses", {
+        const response = await fetch("https://lensonline.onrender.com/api/users/addresses", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

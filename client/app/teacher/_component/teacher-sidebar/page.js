@@ -43,7 +43,7 @@ export default function TeacherSidebar() {
     if (!token) return
 
     try {
-      const res = await fetch('https://lenstudio.onrender.com/api/users/logout', {
+      const res = await fetch('https://lensonline.onrender.com/api/users/logout', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       })

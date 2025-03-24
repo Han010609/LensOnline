@@ -21,7 +21,7 @@ export function ArticleProvider({ children }) {
   // 加載用戶所有文章
   const loadUserArticles = async () => {
     try {
-      const res = await axios.get(`https://lenstudio.onrender.com/api/articles?user_id=${user.id}`, {
+      const res = await axios.get(`https://lensonline.onrender.com/api/articles?user_id=${user.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

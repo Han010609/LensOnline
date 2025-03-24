@@ -50,7 +50,7 @@ export default function TagLikeShareBtnIndex({ articleId, isAuthenticated, showA
         // 修改：增加錯誤處理和降級策略
         try {
           const res = await fetch(
-            `https://lenstudio.onrender.com/api/articles/collection/${articleId}`,
+            `https://lensonline.onrender.com/api/articles/collection/${articleId}`,
             {
               method: 'GET',
               headers: {
@@ -89,7 +89,7 @@ export default function TagLikeShareBtnIndex({ articleId, isAuthenticated, showA
 
     const checkLikeStatus = async () => {
       try {
-        const response = await fetch(`https://lenstudio.onrender.com/api/likes/check?userId=${userId}&articleId=${articleId}`, {
+        const response = await fetch(`https://lensonline.onrender.com/api/likes/check?userId=${userId}&articleId=${articleId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -109,7 +109,7 @@ export default function TagLikeShareBtnIndex({ articleId, isAuthenticated, showA
 
   const fetchArticleLikeCount = async () => {
     try {
-      const response = await fetch(`https://lenstudio.onrender.com/api/articles/${articleId}`)
+      const response = await fetch(`https://lensonline.onrender.com/api/articles/${articleId}`)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
@@ -139,7 +139,7 @@ export default function TagLikeShareBtnIndex({ articleId, isAuthenticated, showA
         // 確保文章 ID 正確傳遞
         const response = await fetch(`/api/articles/${articleId}/tags`);
         console.log('標籤 API 響應:', response.status);
-        
+
         // 其他代碼保持不變
       } catch (error) {
         console.error('獲取標籤失敗:', error);
@@ -177,7 +177,7 @@ export default function TagLikeShareBtnIndex({ articleId, isAuthenticated, showA
       setTimeout(() => setIsClicked(false), 300);
 
       // 修改這裡，使用絕對路徑
-      const response = await fetch(`https://lenstudio.onrender.com/api/likes`, {
+      const response = await fetch(`https://lensonline.onrender.com/api/likes`, {
         method,
         headers: {
           'Content-Type': 'application/json',
@@ -220,10 +220,10 @@ export default function TagLikeShareBtnIndex({ articleId, isAuthenticated, showA
 
     try {
       const method = isFavorite ? 'DELETE' : 'POST'
-      let url = 'https://lenstudio.onrender.com/api/articles/collection'
+      let url = 'https://lensonline.onrender.com/api/articles/collection'
 
       if (method === 'DELETE') {
-        url = `https://lenstudio.onrender.com/api/articles/collection/${articleId}`
+        url = `https://lensonline.onrender.com/api/articles/collection/${articleId}`
       }
 
       // 先更新UI狀態，提供即時反饋

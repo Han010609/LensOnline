@@ -31,7 +31,7 @@ export default function Sidenav() {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    const API = "https://lenstudio.onrender.com/api/users/logout";
+    const API = "https://lensonline.onrender.com/api/users/logout";
     if (!token) return;
 
     try {

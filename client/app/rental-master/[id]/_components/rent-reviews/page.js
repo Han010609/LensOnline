@@ -85,7 +85,7 @@ export default function RentReviews({ reviews = [] }) {
 
     // 🚦 從後端獲取 level = 0 的所有會員 (新 API)
     try {
-      const res = await fetch(`https://lenstudio.onrender.com/api/rental-master/users`, {
+      const res = await fetch(`https://lensonline.onrender.com/api/rental-master/users`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('loginWithToken')}`,
         },
@@ -208,7 +208,7 @@ export default function RentReviews({ reviews = [] }) {
         }
 
         try {
-          const res = await fetch(`https://lenstudio.onrender.com/api/rental-master/reviews/${rentId}`, {
+          const res = await fetch(`https://lensonline.onrender.com/api/rental-master/reviews/${rentId}`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('loginWithToken')}`,
             },
@@ -236,7 +236,7 @@ export default function RentReviews({ reviews = [] }) {
         console.log('🚦 正在發送更新評論請求:', result.value)
         try {
           const res = await fetch(
-            `https://lenstudio.onrender.com/api/rental-master/reviews`,
+            `https://lensonline.onrender.com/api/rental-master/reviews`,
             {
               method: 'PUT',
               headers: {

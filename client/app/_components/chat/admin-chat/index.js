@@ -456,7 +456,7 @@ export default function ChatWidget() {
       formData.append('file', fileObj.file);
 
       // 發送到服務器
-      const response = await fetch('https://lenstudio.onrender.com/api/uploads', {
+      const response = await fetch('https://lensonline.onrender.com/api/uploads', {
         method: 'POST',
         body: formData,
       });
@@ -811,7 +811,7 @@ export default function ChatWidget() {
   // 新增一個專門監聽新訊息的 useEffect
   useEffect(() => {
     if (!socket) return;
-    
+
     const handleNewMessage = (message) => {
       console.log('收到新訊息:', message);
       // 如果是來自當前選擇用戶的未讀訊息
@@ -826,9 +826,9 @@ export default function ChatWidget() {
         }, 100);
       }
     };
-    
+
     socket.on('receive_message', handleNewMessage);
-    
+
     return () => {
       socket.off('receive_message', handleNewMessage);
     };

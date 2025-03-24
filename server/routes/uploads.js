@@ -32,7 +32,7 @@ router.post('/', upload.single('file'), (req, res) => {
   }
 
   // 返回可公開訪問的 URL
-  const publicUrl = `https://lenstudio.onrender.com/uploads/chat/${req.file.filename}`;
+  const publicUrl = `https://lensonline.onrender.com/uploads/chat/${req.file.filename}`;
 
   res.json({
     status: 'success',

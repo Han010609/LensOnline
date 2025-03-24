@@ -17,7 +17,7 @@ export const TeacherProvider = ({ children }) => {
       const headers = { "Content-Type": "application/json" };
       if (token) headers["Authorization"] = `Bearer ${token}`;
 
-      const res = await fetch("https://lenstudio.onrender.com/api/teachers", {
+      const res = await fetch("https://lensonline.onrender.com/api/teachers", {
         method: "GET",
         headers,
       });
@@ -39,7 +39,7 @@ export const TeacherProvider = ({ children }) => {
       const headers = { "Content-Type": "application/json" };
       if (token) headers["Authorization"] = `Bearer ${token}`;
 
-      const res = await fetch(`https://lenstudio.onrender.com/api/teachers/${teacherId}`, {
+      const res = await fetch(`https://lensonline.onrender.com/api/teachers/${teacherId}`, {
         method: "GET",
         headers,
       });

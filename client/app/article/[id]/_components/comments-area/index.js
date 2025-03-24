@@ -231,7 +231,7 @@ function ReplyItem({
     const checkLikeStatus = async () => {
       try {
         const response = await fetch(
-          `https://lenstudio.onrender.com/api/likes/check?userId=${effectiveUserId}&commentId=${commentId}&type=comment`,
+          `https://lensonline.onrender.com/api/likes/check?userId=${effectiveUserId}&commentId=${commentId}&type=comment`,
           {
             headers: {
               Authorization: `Bearer ${effectiveToken}`,
@@ -328,7 +328,7 @@ function ReplyItem({
         setTimeout(() => setIsClicked(false), 300);
       }
 
-      await fetch(`https://lenstudio.onrender.com/api/likes`, {
+      await fetch(`https://lensonline.onrender.com/api/likes`, {
         method,
         headers: {
           'Content-Type': 'application/json',
@@ -424,7 +424,7 @@ function ReplyItem({
     setTimeout(() => setIsSent(false), 300);
 
     try {
-      const res = await fetch(`https://lenstudio.onrender.com/api/comments/${commentId}`, {
+      const res = await fetch(`https://lensonline.onrender.com/api/comments/${commentId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: editedText }),
@@ -485,7 +485,7 @@ function ReplyItem({
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await fetch(`https://lenstudio.onrender.com/api/comments/${id}`, {
+          const res = await fetch(`https://lensonline.onrender.com/api/comments/${id}`, {
             method: 'DELETE',
             credentials: 'include',
           });
@@ -678,49 +678,49 @@ function ReplyItem({
                   place="bottom"
                   style={{ backgroundColor: '#7E7267' }}
                 />
-                  <button className="ms-sm-0 d-flex align-items-center justify-content-start" onClick={handleLike}>
-                    <img
-                      src={
-                        isLiked
-                          ? '/images/article/thumb-up-red.svg'
-                          : '/images/article/thumb-up-black.svg'
-                      }
-                      alt="Like"
-                      style={{
-                        transform: isClicked ? 'scale(1.5)' : 'scale(1)',
-                        transition: 'transform 0.3s ease',
-                      }}
-                    />
-                    <span
-                      className={`${styles['like-counter']} ${numVibrate ? styles.vibrate : ''}`}
-                      onAnimationEnd={() => setNumVibrate(false)}
-                    >
-                      {commentLikeCount}
-                    </span>
-                  </button>
-                  <button
-                    className={`d-flex align-items-center ms-sm-0 ${styles['y-btn-reply-in-reply']}`}
-                    onClick={onReplyButtonClick}
+                <button className="ms-sm-0 d-flex align-items-center justify-content-start" onClick={handleLike}>
+                  <img
+                    src={
+                      isLiked
+                        ? '/images/article/thumb-up-red.svg'
+                        : '/images/article/thumb-up-black.svg'
+                    }
+                    alt="Like"
+                    style={{
+                      transform: isClicked ? 'scale(1.5)' : 'scale(1)',
+                      transition: 'transform 0.3s ease',
+                    }}
+                  />
+                  <span
+                    className={`${styles['like-counter']} ${numVibrate ? styles.vibrate : ''}`}
+                    onAnimationEnd={() => setNumVibrate(false)}
                   >
-                    <img src="/images/article/reply-origin.svg" alt="Reply" />
-                    <span className={`ms-1 ${styles['reply-text']}`}>回覆</span>
-                  </button>
+                    {commentLikeCount}
+                  </span>
+                </button>
+                <button
+                  className={`d-flex align-items-center ms-sm-0 ${styles['y-btn-reply-in-reply']}`}
+                  onClick={onReplyButtonClick}
+                >
+                  <img src="/images/article/reply-origin.svg" alt="Reply" />
+                  <span className={`ms-1 ${styles['reply-text']}`}>回覆</span>
+                </button>
 
-                  {/* 只有留言發布者且滑鼠在留言上才顯示編輯選單 */}
-                  {effectiveUserId === commentUserId && (
-                    <div className={`${styles.moreBtnReply} ms-sm-0 d-flex align-items-center `}
-                      onMouseEnter={() => setMoreHover(true)}
-                      onMouseLeave={() => setMoreHover(false)}
-                    >
-                      <button className={`${styles['more-btn']} d-flex align-items-center justify-content-center`} onClick={toggleMoreOptions}>
-                        <img
-                          src={moreHover ? '/images/article/more-hover.svg' : '/images/article/more-origin.svg'}
-                          alt="More"
-                          className="my-auto"
-                        />
-                      </button>
-                    </div>
-                  )}
+                {/* 只有留言發布者且滑鼠在留言上才顯示編輯選單 */}
+                {effectiveUserId === commentUserId && (
+                  <div className={`${styles.moreBtnReply} ms-sm-0 d-flex align-items-center `}
+                    onMouseEnter={() => setMoreHover(true)}
+                    onMouseLeave={() => setMoreHover(false)}
+                  >
+                    <button className={`${styles['more-btn']} d-flex align-items-center justify-content-center`} onClick={toggleMoreOptions}>
+                      <img
+                        src={moreHover ? '/images/article/more-hover.svg' : '/images/article/more-origin.svg'}
+                        alt="More"
+                        className="my-auto"
+                      />
+                    </button>
+                  </div>
+                )}
 
               </div>
               {showReplyInput && (
@@ -940,7 +940,7 @@ function NestedReplyItem({
         setTimeout(() => setIsClicked(false), 300);
       }
 
-      await fetch(`https://lenstudio.onrender.com/api/likes`, {
+      await fetch(`https://lensonline.onrender.com/api/likes`, {
         method,
         headers: {
           'Content-Type': 'application/json',
@@ -969,7 +969,7 @@ function NestedReplyItem({
     const checkLikeStatus = async () => {
       try {
         const response = await fetch(
-          `https://lenstudio.onrender.com/api/likes/check?userId=${effectiveUserId}&commentId=${props.commentId}&type=comment`,
+          `https://lensonline.onrender.com/api/likes/check?userId=${effectiveUserId}&commentId=${props.commentId}&type=comment`,
           {
             headers: {
               Authorization: `Bearer ${effectiveToken}`,
@@ -1013,7 +1013,7 @@ function NestedReplyItem({
     setTimeout(() => setIsSent(false), 300);
 
     try {
-      const res = await fetch(`https://lenstudio.onrender.com/api/comments/${props.commentId}`, {
+      const res = await fetch(`https://lensonline.onrender.com/api/comments/${props.commentId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: editedText }),
@@ -1096,7 +1096,7 @@ function NestedReplyItem({
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await fetch(`https://lenstudio.onrender.com/api/comments/${id}`, {
+          const res = await fetch(`https://lensonline.onrender.com/api/comments/${id}`, {
             method: 'DELETE',
             credentials: 'include',
           });
@@ -1373,7 +1373,7 @@ export default function CommentsArea({ articleId, refreshTrigger, isAuthenticate
 
   useEffect(() => {
     if (!articleId) return
-    fetch(`https://lenstudio.onrender.com/api/comments/count?articleId=${articleId}`)
+    fetch(`https://lensonline.onrender.com/api/comments/count?articleId=${articleId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.count !== undefined) {
@@ -1389,7 +1389,7 @@ export default function CommentsArea({ articleId, refreshTrigger, isAuthenticate
     if (!isCollapsed && articleId) {
       const fetchComments = async () => {
         try {
-          const res = await fetch(`https://lenstudio.onrender.com/api/article_comments?articleId=${articleId}`);
+          const res = await fetch(`https://lensonline.onrender.com/api/article_comments?articleId=${articleId}`);
           if (!res.ok) {
             // 檢查回應是否為 JSON 格式
             const contentType = res.headers.get('content-type');

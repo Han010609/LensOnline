@@ -65,7 +65,7 @@ export default function FavoriteButton({ rentId, rental }) {
     try {
       console.log("發送收藏請求:", { rent_id: rentId }) // ✅ 檢查請求是否正確發送
 
-      const response = await fetch(`https://lenstudio.onrender.com/api/rental/collection`, {
+      const response = await fetch(`https://lensonline.onrender.com/api/rental/collection`, {
         method: isFavorite ? 'DELETE' : 'POST',
         headers: {
           'Content-Type': 'application/json',

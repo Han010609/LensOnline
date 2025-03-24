@@ -6,7 +6,7 @@ const router = express.Router()
 
 //cors設定
 const corsOptions = {
-  origin: ['http://localhost:3000','https://lenstudio.vercel.app/'], // 允許來自 http://localhost:3000 的請求
+  origin: ['http://localhost:3000', 'https://lensonline.vercel.app/'], // 允許來自 http://localhost:3000 的請求
   credentials: true,
   allowedHeaders: ["Authorization", "Content-Type"],
 };
@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
     const [orderId] = await pool.execute(
       `SELECT id FROM orders WHERE order_code = ? LIMIT 1`, [merchantTradeNo]
     );
-    
+
     await Promise.all(Object.values(cartItems).map(async (cartItem) => {
       let categoryId = null, coursesId = null, rentalId = null;
       const model = cartItem.model || cartItem.name;

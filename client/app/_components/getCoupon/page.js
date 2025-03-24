@@ -38,12 +38,12 @@ const CouponButton = () => {
     try {
       // **1. 檢查兩種優惠券是否已達領取上限**
       const checkCoupons = await Promise.all([
-        fetch('https://lenstudio.onrender.com/api/getCp/check', {
+        fetch('https://lensonline.onrender.com/api/getCp/check', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ userId, couponId: 1 }),
         }),
-        fetch('https://lenstudio.onrender.com/api/getCp/check', {
+        fetch('https://conrender.com/api/getCp/check', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ userId, couponId: 2 }),
@@ -70,7 +70,7 @@ const CouponButton = () => {
 
       // **2. 領取所有未達上限的優惠券**
       const claimRequests = couponsToClaim.map(couponId =>
-        fetch('https://lenstudio.onrender.com/api/getCp', {
+        fetch('https://lensonline.onrender.com/api/getCp', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ userId, quantity: 1, couponId }),

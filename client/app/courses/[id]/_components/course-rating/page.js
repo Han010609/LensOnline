@@ -22,7 +22,7 @@ export default function CourseRating() {
 
     const fetchComments = async () => {
       try {
-        const res = await fetch(`https://lenstudio.onrender.com/api/courses/${id}/comments`)
+        const res = await fetch(`https://lensonline.onrender.com/api/courses/${id}/comments`)
         if (!res.ok) throw new Error('無法獲取評論資料')
 
         const data = await res.json()

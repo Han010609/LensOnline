@@ -124,7 +124,7 @@ export default function RentReviews({ reviews = [], setReviews, currentUserId })
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await fetch(`https://lenstudio.onrender.com/api/rental/reviews/${review.id}`, {
+          const res = await fetch(`https://lensonline.onrender.com/api/rental/reviews/${review.id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

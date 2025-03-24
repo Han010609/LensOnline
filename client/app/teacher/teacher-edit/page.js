@@ -62,7 +62,7 @@ export default function TeacherEdit() {
     formData.append('upload', file)
 
     try {
-      const response = await fetch('https://lenstudio.onrender.com/api/teacher-upload', {
+      const response = await fetch('https://lensonline.onrender.com/api/teacher-upload', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('loginWithToken')}`,
@@ -77,7 +77,7 @@ export default function TeacherEdit() {
 
       const imageUrl = data.image_url.startsWith('http')
         ? data.image_url // **確保 API 已回傳完整網址**
-        : `https://lenstudio.onrender.com${data.image_url}` // **如果是相對路徑，加上 8000 埠口**
+        : `https://lensonline.onrender.com${data.image_url}` // **如果是相對路徑，加上 8000 埠口**
 
       // console.log('✅ 頭像上傳成功，URL:', imageUrl)
 
@@ -102,7 +102,7 @@ export default function TeacherEdit() {
     setLoading(true)
 
     try {
-      const res = await fetch('https://lenstudio.onrender.com/api/teachers/me', {
+      const res = await fetch('https://lensonline.onrender.com/api/teachers/me', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

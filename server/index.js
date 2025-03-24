@@ -51,7 +51,7 @@ const server = http.createServer(app);
 
 
 
-const whiteList = ['http://localhost:5500', 'http://localhost:3000', 'https://lenstudio.vercel.app']
+const whiteList = ['http://localhost:5500', 'http://localhost:3000', 'https://lensonline.vercel.app']
 const corsOptions = {
   credentials: true,
   origin: (origin, callback) => {

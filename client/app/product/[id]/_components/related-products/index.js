@@ -13,7 +13,7 @@ export default function RelatedProducts({ brandId, currentId }) {
   useEffect(() => {
     if (!brandId || !currentId) return;
 
-    fetch(`https://lenstudio.onrender.com/api/product/related/${brandId}/${currentId}`)
+    fetch(`https://lensonline.onrender.com/api/product/related/${brandId}/${currentId}`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("錯誤:", error));

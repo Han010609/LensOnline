@@ -40,7 +40,7 @@ router.post("/", authenticate, upload.single("upload"), async (req, res) => {
     return res.status(400).json({ error: "❌ 沒有選擇圖片" });
   }
 
-  const imageUrl = `https://lenstudio.onrender.com/uploads/images/teacher/${req.file.filename}`;
+  const imageUrl = `https://lensonline.onrender.com/uploads/images/teacher/${req.file.filename}`;
 
   try {
     // **更新講師資料**

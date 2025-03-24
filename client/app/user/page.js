@@ -76,7 +76,7 @@ export default function UserPage(props) {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch(`https://lenstudio.onrender.com/api/users/users/me`, {
+      const response = await fetch(`https://lensonline.onrender.com/api/users/users/me`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -123,7 +123,7 @@ export default function UserPage(props) {
     formData.append("account", user.account);
 
     try {
-      const response = await fetch("https://lenstudio.onrender.com/api/users/upload", {
+      const response = await fetch("https://lensonline.onrender.com/api/users/upload", {
         method: "POST",
         body: formData,
       });
@@ -161,7 +161,7 @@ export default function UserPage(props) {
 
     try {
       const response = await fetch(
-        `https://lenstudio.onrender.com/api/users/${user.account}`,
+        `https://lensonline.onrender.com/api/users/${user.account}`,
         {
           method: 'PUT',
           headers: {
@@ -235,7 +235,7 @@ export default function UserPage(props) {
     }
 
     try {
-      const response = await fetch('https://lenstudio.onrender.com/api/users/addresses/me', {
+      const response = await fetch('https://lensonline.onrender.com/api/users/addresses/me', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -266,7 +266,7 @@ export default function UserPage(props) {
     // 初始取得地址列表
     React.useEffect(() => {
       const fetchAddresses = async () => {
-        const response = await fetch('https://lenstudio.onrender.com/api/users/addresses');
+        const response = await fetch('https://lensonline.onrender.com/api/users/addresses');
         const result = await response.json();
         if (result.status === 'success') {
           setAddresses(result.data);

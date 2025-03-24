@@ -29,7 +29,7 @@ export const signInWithGoogle = async () => {
     const picture = user.photoURL;
 
     // ✅ 發送請求到後端
-    const response = await fetch("https://lenstudio.onrender.com/api/auth/google", {
+    const response = await fetch("https://lensonline.onrender.com/api/auth/google", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: idToken, email, name, picture }),

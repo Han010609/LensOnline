@@ -38,7 +38,7 @@ function ProductCard({ course }) {
   const checkFavoriteStatus = async (token, courseId) => {
     try {
       const res = await fetch(
-        `https://lenstudio.onrender.com/api/courses/collection/${courseId}`,
+        `https://lensonline.onrender.com/api/courses/collection/${courseId}`,
         {
           method: 'GET',
           headers: {
@@ -72,10 +72,10 @@ function ProductCard({ course }) {
 
     try {
       const method = isFavorite ? 'DELETE' : 'POST';
-      let url = 'https://lenstudio.onrender.com/api/courses/collection';
+      let url = 'https://lensonline.onrender.com/api/courses/collection';
 
       if (method === 'DELETE') {
-        url = `https://lenstudio.onrender.com/api/courses/collection/${course.id}`;
+        url = `https://lensonline.onrender.com/api/courses/collection/${course.id}`;
       }
 
       console.log('📌 送出的請求:', method, url);
@@ -255,7 +255,7 @@ function ProductCardScroll({ course }) {
   const checkFavoriteStatus = async (token, courseId) => {
     try {
       const res = await fetch(
-        `https://lenstudio.onrender.com/api/courses/collection/${courseId}`,
+        `https://lensonline.onrender.com/api/courses/collection/${courseId}`,
         {
           method: 'GET',
           headers: {
@@ -289,10 +289,10 @@ function ProductCardScroll({ course }) {
 
     try {
       const method = isFavorite ? 'DELETE' : 'POST';
-      let url = 'https://lenstudio.onrender.com/api/courses/collection';
+      let url = 'https://lensonline.onrender.com/api/courses/collection';
 
       if (method === 'DELETE') {
-        url = `https://lenstudio.onrender.com/api/courses/collection/${course.id}`;
+        url = `https://lensonline.onrender.com/api/courses/collection/${course.id}`;
       }
 
       const res = await fetch(url, {

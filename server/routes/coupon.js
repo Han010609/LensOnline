@@ -5,7 +5,7 @@ import pool from '../db.js'
 const router = express.Router()
 
 const corsOptions = {
-    origin: ['http://localhost:3000','https://lenstudio.vercel.app/'], // 允許來自 http://localhost:3000 的請求
+    origin: ['http://localhost:3000', 'https://lensonline.vercel.app/'], // 允許來自 http://localhost:3000 的請求
     credentials: true,
     allowedHeaders: ["Authorization", "Content-Type"],
 };
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
             `SELECT uc.id as code, c.discount_type as disType, c.type, c.name as cpName, uc.created_at, c.discount, c.lower_purchase as minimum, c.img FROM users u 
             inner Join user_coupon uc on uc.user_id = u.id 
             inner Join coupon c on c.id = uc.coupon_id WHERE u.id = ?;
-         `,[userId]
+         `, [userId]
         );
 
         res.status(200).json({ success: true, message: "優惠券獲取成功", result });

@@ -143,7 +143,7 @@ export default function RentReviews({ reviews = [] }) {
         });
 
         if (confirmResult.isConfirmed) {
-          await fetch(`https://lenstudio.onrender.com/api/myorders/rent/reviews/${review.id}`, {
+          await fetch(`https://lensonline.onrender.com/api/myorders/rent/reviews/${review.id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -226,7 +226,7 @@ export default function RentReviews({ reviews = [] }) {
         });
 
         if (deleteResult.isConfirmed) {
-          await fetch(`https://lenstudio.onrender.com/api/myorders/rent/reviews/${review.id}`, {
+          await fetch(`https://lensonline.onrender.com/api/myorders/rent/reviews/${review.id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

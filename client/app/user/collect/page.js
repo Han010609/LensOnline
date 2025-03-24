@@ -36,7 +36,7 @@ export default function CollectPage() {
     if (!token) return;
     setIsLoading(true);
 
-    fetch(`https://lenstudio.onrender.com/api/users/favorites/me`, {
+    fetch(`https://lensonline.onrender.com/api/users/favorites/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
