@@ -371,7 +371,7 @@ router.get('/:id', async (req, res) => {
 
     // 3.獲取推薦商品（基於 `rent_recommend`）
     let recommendQuery = `
-        SELECT 
+      SELECT 
         r.id,
         ANY_VALUE(r.name) AS name,
         ANY_VALUE(r.brand) AS brand,
@@ -389,13 +389,14 @@ router.get('/:id', async (req, res) => {
         ANY_VALUE(r.len_kind) AS len_kind,
         ANY_VALUE(r.len_with) AS len_with,
         ANY_VALUE(r.acc_kind) AS acc_kind,
-        ANY_VALUE(r.acc_with) AS acc_with,ㄋ
+        ANY_VALUE(r.acc_with) AS acc_with,
         ANY_VALUE(rr.sequence) AS sequence,
         GROUP_CONCAT(DISTINCT ri.url ORDER BY ri.sequence ASC) AS images,
         GROUP_CONCAT(DISTINCT t.tags) AS hashtags,
         IFNULL(reviews.total_reviews, 0) AS total_reviews,
         IFNULL(reviews.average_rating, 0) AS average_rating
-      `
+      `;
+
     // 🚀 若用戶已登入，加入收藏狀態
     if (user_id) {
       recommendQuery += `, IF(c.user_id IS NOT NULL, TRUE, FALSE) AS is_favorite `
