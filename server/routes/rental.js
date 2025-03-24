@@ -23,253 +23,253 @@ const auth = (req, res, next) => {
   }
 }
 
-// 📌 簡化版 rental API，用於部署測試
-router.get('/', async (req, res) => {
-  try {
-    const [rentals] = await pool.query('SELECT * FROM rental LIMIT 10')
-    res.json({ success: true, rentals })
-  } catch (error) {
-    console.error('❌ rental 測試 API 出錯:', error)
-    res.status(500).json({ success: false, error: '伺服器錯誤', details: error.message })
-  }
-})
-
-
-
-// // 📌統一 API - 獲取商品資料 & 篩選選項
+// // 📌 簡化版 rental API，用於部署測試
 // router.get('/', async (req, res) => {
 //   try {
-//     const token = req.headers.authorization?.split(' ')[1];
-//     let user_id = null;
-
-//     // 🚀 若有 Token，解析取得 user_id
-//     if (token) {
-//       try {
-//         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-//         user_id = decoded.id;
-//       } catch (error) {
-//         console.error('JWT 驗證失敗:', error.message);
-//       }
-//     }
-
-//     // ✅ 組織商品查詢語句
-//     let rentalQuery = `
-//       SELECT 
-//           r.*, 
-//           GROUP_CONCAT(DISTINCT ri.url ORDER BY COALESCE(ri.sequence, 999) ASC) AS images,
-//           GROUP_CONCAT(DISTINCT t.tags) AS hashtags,
-//           IFNULL(reviews.total_reviews, 0) AS total_reviews,
-//           IFNULL(reviews.average_rating, 0) AS average_rating      
-//       `;
-
-//     // 🚀 若用戶已登入，加入收藏關聯
-//     if (user_id) {
-//       rentalQuery += `, IF(c.user_id IS NOT NULL, TRUE, FALSE) AS is_favorite `;
-//     }
-
-//     rentalQuery += `
-//           FROM rental r
-//           LEFT JOIN rent_image ri ON r.id = ri.rent_id
-//           LEFT JOIN rent_hashtag rh ON r.id = rh.rent_id
-//           LEFT JOIN rent_tags t ON rh.rent_tags_id = t.id
-
-//           -- 🚦 單獨計算評論數據，避免重複統計
-//           LEFT JOIN (
-//               SELECT 
-//                   ur.rent_id, 
-//                   COUNT(*) AS total_reviews, 
-//                   ROUND(AVG(ur.rating), 1) AS average_rating
-//               FROM user_rentals ur
-//               WHERE ur.status = '已完成'
-//               AND ur.comment IS NOT NULL
-//               AND ur.comment_at IS NOT NULL  -- ✅ 過濾軟刪除評論
-//               GROUP BY ur.rent_id
-//           ) AS reviews ON reviews.rent_id = r.id
-//         `;
-
-//     // ✅ 若用戶已登入，則 `JOIN collection` 取得收藏狀態
-//     if (user_id) {
-//       rentalQuery += ` LEFT JOIN collection c ON r.id = c.rent_id AND c.user_id = ? `;
-//     }
-
-//     rentalQuery += ` WHERE 1=1 `; // ✅ 確保篩選條件可以正常拼接
-//     let queryParams = user_id ? [user_id] : [];
-
-// console.log('🚧 即將執行 SQL:', rentalQuery)
-// console.log('🧪 使用參數:', queryParams)
-
-//     const { query, category, advanced, brands } = req.query
-
-//     // ✅ 用途篩選邏輯 (動態映射)
-//     const categoryMapping = {
-//       日常攝影: {
-//         hashtags: ['輕便', '4K錄影', '超廣角', '多功能'],
-//         types: ['APS-C相機', '標準變焦鏡頭', '廣角定焦鏡頭', '腳架', '麥克風'],
-//       },
-//       專業攝影: {
-//         hashtags: ['高畫質', '旗艦', '高階款', '專業級', '人像'],
-//         types: [
-//           '全幅相機',
-//           '標準定焦鏡頭',
-//           '望遠變焦鏡頭',
-//           '廣角定焦鏡頭',
-//           '閃光燈',
-//           '轉接環',
-//         ],
-//       },
-//       影像創作: {
-//         hashtags: ['Vlog', '4K錄影', '8K錄影', '音訊', '防手震'],
-//         types: [
-//           'APS-C相機',
-//           '全幅相機',
-//           '標準變焦鏡頭',
-//           '廣角變焦鏡頭',
-//           '麥克風',
-//           '腳架',
-//         ],
-//       },
-//       戶外運動: {
-//         hashtags: ['高速快門', '連拍', '自動對焦', '防手震', '超望遠'],
-//         types: ['全幅相機', '望遠變焦鏡頭', '望遠定焦鏡頭', '腳架', '閃光燈'],
-//       },
-//       旅遊拍攝: {
-//         hashtags: ['旅行', '輕便', '熱靴', '多功能', '大光圈'],
-//         types: [
-//           'APS-C相機',
-//           '全幅相機',
-//           '廣角變焦鏡頭',
-//           '標準變焦鏡頭',
-//           '腳架',
-//           '麥克風',
-//         ],
-//       },
-//       產品攝影: {
-//         hashtags: ['微距', '大光圈', '高階款', '專業級'],
-//         types: [
-//           '全幅相機',
-//           '微距鏡頭',
-//           '標準定焦鏡頭',
-//           '廣角定焦鏡頭',
-//           '轉接環',
-//           '閃光燈',
-//           '腳架',
-//         ],
-//       },
-//     }
-
-//     // ✅ 用 "全部" 作為預設選項，並動態添加 categoryMapping 中的用途分類
-//     const categoryOptions = ['全部', ...Object.keys(categoryMapping)]
-
-
-//     // 🔍 搜尋功能 (支援名稱、摘要、標籤模糊搜尋)
-//     if (query) {
-//       rentalQuery += ` AND (r.name LIKE ? OR r.summary LIKE ? OR t.tags LIKE ?) `
-//       queryParams.push(`%${query}%`, `%${query}%`, `%${query}%`)
-//     }
-
-//     // ✅ 用途篩選 (進階篩選)
-//     if (category && category !== '全部' && categoryMapping[category]) {
-//       const { hashtags, types } = categoryMapping[category]
-
-//       let orConditions = [];
-
-//       // 🟢 Hashtag 篩選 (允許 OR 查詢)
-//       if (hashtags.length > 0) {
-//         const hashtagCondition = `(${hashtags
-//           .map(() => 't.tags LIKE ?')
-//           .join(' OR ')})`
-//         orConditions.push(hashtagCondition)
-//         queryParams.push(...hashtags.map((tag) => `%${tag}%`))
-//       }
-
-//       // 🟢 設備篩選 (允許 OR 查詢)
-//       if (types.length > 0) {
-//         const typeCondition = `(
-//           r.cam_kind IN (${types.map(() => '?').join(',')}) OR 
-//           r.len_kind IN (${types.map(() => '?').join(',')}) OR 
-//           r.acc_kind IN (${types.map(() => '?').join(',')})
-//         )`
-//         orConditions.push(typeCondition)
-//         queryParams.push(...types, ...types, ...types)
-//       }
-
-//       // 🟢 將 Hashtags 和 Types 的條件用 OR 連接
-//       if (orConditions.length > 0) {
-//         rentalQuery += ` AND (${orConditions.join(' OR ')})`
-//       }
-//     }
-
-//     // ✅ 設備篩選 (進階篩選)
-//     if (advanced) {
-//       const advancedList = Array.isArray(advanced) ? advanced : [advanced]
-//       rentalQuery += ` AND (
-//         r.cam_kind IN (${advancedList.map(() => '?').join(',')}) OR 
-//         r.len_kind IN (${advancedList.map(() => '?').join(',')}) OR 
-//         r.acc_kind IN (${advancedList.map(() => '?').join(',')})
-//       ) `
-//       queryParams.push(...advancedList, ...advancedList, ...advancedList)
-//     }
-
-//     // ✅ 品牌篩選（支援 "其他" 選項）
-//     if (brands) {
-//       const brandList = Array.isArray(brands) ? brands : [brands]
-
-//       if (brandList.length === 1 && brandList[0] === '其他') {
-//         rentalQuery += ` AND r.brand IS NULL `
-//       } else if (brandList.includes('其他')) {
-//         rentalQuery += ` AND (r.brand IN (${brandList
-//           .filter((b) => b !== '其他')
-//           .map(() => '?')
-//           .join(',')}) OR r.brand IS NULL) `
-//         queryParams.push(...brandList.filter((b) => b !== '其他'))
-//       } else {
-//         rentalQuery += ` AND r.brand IN (${brandList
-//           .map(() => '?')
-//           .join(',')}) `
-//         queryParams.push(...brandList)
-//       }
-//     }
-
-//     rentalQuery += ` GROUP BY r.id ORDER BY r.id ASC `;
-
-//     const [rentals] = await pool.query(rentalQuery, queryParams)
-//     rentals.forEach((rental) => {
-//       rental.images = rental.images ? rental.images.split(',') : []
-//       rental.hashtags = rental.hashtags ? rental.hashtags.split(',') : []
-//     })
-
-//     // 取得所有標籤
-//     const [tags] = await pool.query(
-//       `SELECT id, tags FROM rent_tags ORDER BY sequence ASC`
-//     )
-
-//     // ✅ 完整的回傳資料，包括所有前端所需的篩選選項
-//     res.json({
-//       success: true,
-//       rentals,
-//       tags: tags || [],
-//       categories: categoryOptions,
-//       equipment: [
-//         '全幅相機',
-//         'APS-C相機',
-//         '廣角變焦鏡頭',
-//         '標準變焦鏡頭',
-//         '望遠變焦鏡頭',
-//         '廣角定焦鏡頭',
-//         '標準定焦鏡頭',
-//         '望遠定焦鏡頭',
-//         '轉接環',
-//         '閃光燈',
-//         '麥克風',
-//         '腳架',
-//       ],
-//       brands: ['Canon', 'Sony', 'Nikon', 'Leica', '其他'],
-//     })
+//     const [rentals] = await pool.query('SELECT * FROM rental LIMIT 10')
+//     res.json({ success: true, rentals })
 //   } catch (error) {
-//     console.error('❌ 錯誤:', error)
-//     res.status(500).json({ success: false, error: '伺服器錯誤' })
+//     console.error('❌ rental 測試 API 出錯:', error)
+//     res.status(500).json({ success: false, error: '伺服器錯誤', details: error.message })
 //   }
 // })
+
+
+
+// 📌統一 API - 獲取商品資料 & 篩選選項
+router.get('/', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    let user_id = null;
+
+    // 🚀 若有 Token，解析取得 user_id
+    if (token) {
+      try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        user_id = decoded.id;
+      } catch (error) {
+        console.error('JWT 驗證失敗:', error.message);
+      }
+    }
+
+    // ✅ 組織商品查詢語句
+    let rentalQuery = `
+      SELECT 
+          r.*, 
+          GROUP_CONCAT(DISTINCT ri.url ORDER BY COALESCE(ri.sequence, 999) ASC) AS images,
+          GROUP_CONCAT(DISTINCT t.tags) AS hashtags,
+          IFNULL(reviews.total_reviews, 0) AS total_reviews,
+          IFNULL(reviews.average_rating, 0) AS average_rating      
+      `;
+
+    // 🚀 若用戶已登入，加入收藏關聯
+    if (user_id) {
+      rentalQuery += `, IF(c.user_id IS NOT NULL, TRUE, FALSE) AS is_favorite `;
+    }
+
+    rentalQuery += `
+          FROM rental r
+          LEFT JOIN rent_image ri ON r.id = ri.rent_id
+          LEFT JOIN rent_hashtag rh ON r.id = rh.rent_id
+          LEFT JOIN rent_tags t ON rh.rent_tags_id = t.id
+
+          -- 🚦 單獨計算評論數據，避免重複統計
+          LEFT JOIN (
+              SELECT 
+                  ur.rent_id, 
+                  COUNT(*) AS total_reviews, 
+                  ROUND(AVG(ur.rating), 1) AS average_rating
+              FROM user_rentals ur
+              WHERE ur.status = '已完成'
+              AND ur.comment IS NOT NULL
+              AND ur.comment_at IS NOT NULL  -- ✅ 過濾軟刪除評論
+              GROUP BY ur.rent_id
+          ) AS reviews ON reviews.rent_id = r.id
+        `;
+
+    // ✅ 若用戶已登入，則 `JOIN collection` 取得收藏狀態
+    if (user_id) {
+      rentalQuery += ` LEFT JOIN collection c ON r.id = c.rent_id AND c.user_id = ? `;
+    }
+
+    rentalQuery += ` WHERE 1=1 `; // ✅ 確保篩選條件可以正常拼接
+    let queryParams = user_id ? [user_id] : [];
+
+    console.log('🚧 即將執行 SQL:', rentalQuery)
+    console.log('🧪 使用參數:', queryParams)
+
+    const { query, category, advanced, brands } = req.query
+
+    // ✅ 用途篩選邏輯 (動態映射)
+    const categoryMapping = {
+      日常攝影: {
+        hashtags: ['輕便', '4K錄影', '超廣角', '多功能'],
+        types: ['APS-C相機', '標準變焦鏡頭', '廣角定焦鏡頭', '腳架', '麥克風'],
+      },
+      專業攝影: {
+        hashtags: ['高畫質', '旗艦', '高階款', '專業級', '人像'],
+        types: [
+          '全幅相機',
+          '標準定焦鏡頭',
+          '望遠變焦鏡頭',
+          '廣角定焦鏡頭',
+          '閃光燈',
+          '轉接環',
+        ],
+      },
+      影像創作: {
+        hashtags: ['Vlog', '4K錄影', '8K錄影', '音訊', '防手震'],
+        types: [
+          'APS-C相機',
+          '全幅相機',
+          '標準變焦鏡頭',
+          '廣角變焦鏡頭',
+          '麥克風',
+          '腳架',
+        ],
+      },
+      戶外運動: {
+        hashtags: ['高速快門', '連拍', '自動對焦', '防手震', '超望遠'],
+        types: ['全幅相機', '望遠變焦鏡頭', '望遠定焦鏡頭', '腳架', '閃光燈'],
+      },
+      旅遊拍攝: {
+        hashtags: ['旅行', '輕便', '熱靴', '多功能', '大光圈'],
+        types: [
+          'APS-C相機',
+          '全幅相機',
+          '廣角變焦鏡頭',
+          '標準變焦鏡頭',
+          '腳架',
+          '麥克風',
+        ],
+      },
+      產品攝影: {
+        hashtags: ['微距', '大光圈', '高階款', '專業級'],
+        types: [
+          '全幅相機',
+          '微距鏡頭',
+          '標準定焦鏡頭',
+          '廣角定焦鏡頭',
+          '轉接環',
+          '閃光燈',
+          '腳架',
+        ],
+      },
+    }
+
+    // ✅ 用 "全部" 作為預設選項，並動態添加 categoryMapping 中的用途分類
+    const categoryOptions = ['全部', ...Object.keys(categoryMapping)]
+
+
+    // 🔍 搜尋功能 (支援名稱、摘要、標籤模糊搜尋)
+    if (query) {
+      rentalQuery += ` AND (r.name LIKE ? OR r.summary LIKE ? OR t.tags LIKE ?) `
+      queryParams.push(`%${query}%`, `%${query}%`, `%${query}%`)
+    }
+
+    // ✅ 用途篩選 (進階篩選)
+    if (category && category !== '全部' && categoryMapping[category]) {
+      const { hashtags, types } = categoryMapping[category]
+
+      let orConditions = [];
+
+      // 🟢 Hashtag 篩選 (允許 OR 查詢)
+      if (hashtags.length > 0) {
+        const hashtagCondition = `(${hashtags
+          .map(() => 't.tags LIKE ?')
+          .join(' OR ')})`
+        orConditions.push(hashtagCondition)
+        queryParams.push(...hashtags.map((tag) => `%${tag}%`))
+      }
+
+      // 🟢 設備篩選 (允許 OR 查詢)
+      if (types.length > 0) {
+        const typeCondition = `(
+          r.cam_kind IN (${types.map(() => '?').join(',')}) OR 
+          r.len_kind IN (${types.map(() => '?').join(',')}) OR 
+          r.acc_kind IN (${types.map(() => '?').join(',')})
+        )`
+        orConditions.push(typeCondition)
+        queryParams.push(...types, ...types, ...types)
+      }
+
+      // 🟢 將 Hashtags 和 Types 的條件用 OR 連接
+      if (orConditions.length > 0) {
+        rentalQuery += ` AND (${orConditions.join(' OR ')})`
+      }
+    }
+
+    // ✅ 設備篩選 (進階篩選)
+    if (advanced) {
+      const advancedList = Array.isArray(advanced) ? advanced : [advanced]
+      rentalQuery += ` AND (
+        r.cam_kind IN (${advancedList.map(() => '?').join(',')}) OR 
+        r.len_kind IN (${advancedList.map(() => '?').join(',')}) OR 
+        r.acc_kind IN (${advancedList.map(() => '?').join(',')})
+      ) `
+      queryParams.push(...advancedList, ...advancedList, ...advancedList)
+    }
+
+    // ✅ 品牌篩選（支援 "其他" 選項）
+    if (brands) {
+      const brandList = Array.isArray(brands) ? brands : [brands]
+
+      if (brandList.length === 1 && brandList[0] === '其他') {
+        rentalQuery += ` AND r.brand IS NULL `
+      } else if (brandList.includes('其他')) {
+        rentalQuery += ` AND (r.brand IN (${brandList
+          .filter((b) => b !== '其他')
+          .map(() => '?')
+          .join(',')}) OR r.brand IS NULL) `
+        queryParams.push(...brandList.filter((b) => b !== '其他'))
+      } else {
+        rentalQuery += ` AND r.brand IN (${brandList
+          .map(() => '?')
+          .join(',')}) `
+        queryParams.push(...brandList)
+      }
+    }
+
+    rentalQuery += ` GROUP BY r.id ORDER BY r.id ASC `;
+
+    const [rentals] = await pool.query(rentalQuery, queryParams)
+    rentals.forEach((rental) => {
+      rental.images = rental.images ? rental.images.split(',') : []
+      rental.hashtags = rental.hashtags ? rental.hashtags.split(',') : []
+    })
+
+    // 取得所有標籤
+    const [tags] = await pool.query(
+      `SELECT id, tags FROM rent_tags ORDER BY sequence ASC`
+    )
+
+    // ✅ 完整的回傳資料，包括所有前端所需的篩選選項
+    res.json({
+      success: true,
+      rentals,
+      tags: tags || [],
+      categories: categoryOptions,
+      equipment: [
+        '全幅相機',
+        'APS-C相機',
+        '廣角變焦鏡頭',
+        '標準變焦鏡頭',
+        '望遠變焦鏡頭',
+        '廣角定焦鏡頭',
+        '標準定焦鏡頭',
+        '望遠定焦鏡頭',
+        '轉接環',
+        '閃光燈',
+        '麥克風',
+        '腳架',
+      ],
+      brands: ['Canon', 'Sony', 'Nikon', 'Leica', '其他'],
+    })
+  } catch (error) {
+    console.error('❌ 錯誤:', error)
+    res.status(500).json({ success: false, error: '伺服器錯誤' })
+  }
+})
 
 /* 商品細節頁 */
 router.get('/:id', async (req, res) => {
