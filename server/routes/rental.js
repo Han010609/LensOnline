@@ -54,7 +54,7 @@ router.get('/', async (req, res) => {
 
     // ✅ 組織商品查詢語句
     let rentalQuery = `
- SELECT 
+      SELECT 
         r.id,
         ANY_VALUE(r.name) AS name,
         ANY_VALUE(r.brand) AS brand,
@@ -309,9 +309,26 @@ router.get('/:id', async (req, res) => {
     const [rental] = await pool.query(
       `
       SELECT 
-          r.*, 
-          GROUP_CONCAT(DISTINCT ri.url ORDER BY ri.sequence ASC) AS images,
-          GROUP_CONCAT(DISTINCT t.tags) AS hashtags
+        r.id,
+        ANY_VALUE(r.name) AS name,
+        ANY_VALUE(r.brand) AS brand,
+        ANY_VALUE(r.category) AS category,
+        ANY_VALUE(r.fee) AS fee,
+        ANY_VALUE(r.stock) AS stock,
+        ANY_VALUE(r.dimension) AS dimension,
+        ANY_VALUE(r.weight) AS weight,
+        ANY_VALUE(r.status) AS status,
+        ANY_VALUE(r.append) AS append,
+        ANY_VALUE(r.summary) AS summary,
+        ANY_VALUE(r.cam_kind) AS cam_kind,
+        ANY_VALUE(r.cam_sensor) AS cam_sensor,
+        ANY_VALUE(r.cam_with) AS cam_with,
+        ANY_VALUE(r.len_kind) AS len_kind,
+        ANY_VALUE(r.len_with) AS len_with,
+        ANY_VALUE(r.acc_kind) AS acc_kind,
+        ANY_VALUE(r.acc_with) AS acc_with,
+        GROUP_CONCAT(DISTINCT ri.url ORDER BY ri.sequence ASC) AS images,
+        GROUP_CONCAT(DISTINCT t.tags) AS hashtags
       FROM rental r
       LEFT JOIN rent_image ri ON r.id = ri.rent_id
       LEFT JOIN rent_hashtag rh ON r.id = rh.rent_id
