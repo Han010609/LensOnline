@@ -136,12 +136,13 @@
   width: auto !important; /* 避免 Bootstrap 預設 */
   min-width: 300px;
   margin: auto !important; /* 確保能夠水平置中 */
+  right: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   z-index: 1999;
-  @media (max-width: 767px) {
-    top: -100px;
-  }
+  // @media (max-width: 767px) {
+  //   top: -100px;
+  // }
 }
 // 更多標籤
 .k-modal-title {
