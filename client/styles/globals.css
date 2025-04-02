@@ -819,7 +819,7 @@ footer-title {
   border: none;
 }
 
-.d-flex {
+/* .d-flex {
   @media (max-width: 768px) {
     gap: 8px !important;
   }
@@ -831,7 +831,7 @@ footer-title {
   @media (max-width: 420px) {
     gap: 15px !important;
   }
-}
+} */
 
 .y-comment-action {
   .d-flex .action-btn {
@@ -885,7 +885,7 @@ footer-title {
 }
 
 .modal-body {
-  padding: 2rem 2rem 3rem 2rem;
+  /* padding: 2rem 2rem 3rem 2rem; */
 }
 
 .btn-primary {
